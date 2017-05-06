@@ -1,0 +1,111 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.arek.lab4_part2.PetFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ScrollView>
+
+    <RelativeLayout tools:context="com.example.arek.lab4_part2.WildAnimalFragment"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Pet Animal"
+        android:id="@+id/textView6"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:id="@+id/ed_name_pet"
+            android:inputType="text"
+            android:layout_below="@+id/textView6"
+            android:layout_alignRight="@+id/sw_place"
+            android:layout_alignEnd="@+id/sw_place" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rg_drink"
+            android:layout_below="@+id/textView9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:weightSum="1">
+
+            <RadioButton
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_water"
+                android:id="@+id/rb_water"
+                android:layout_gravity="center_horizontal"
+                android:checked="true" />
+
+            <RadioButton
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:text="@string/rb_milk"
+                android:id="@+id/rb_milk"
+                android:layout_gravity="center_horizontal"
+                android:checked="false"
+                android:layout_weight="0.06" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/txt_name"
+            android:id="@+id/textView2"
+            android:gravity="center"
+            android:layout_alignBottom="@+id/ed_name_pet"
+            android:layout_alignLeft="@+id/sw_place"
+            android:layout_alignStart="@+id/sw_place"
+            android:layout_below="@+id/textView6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/tv_prefer_to_drink"
+            android:id="@+id/textView9"
+            android:layout_below="@+id/ed_name_pet"
+            android:layout_centerHorizontal="true" />
+
+        <Switch
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/sw_place"
+            android:checked="true"
+            android:text="Living house/street"
+            android:layout_below="@+id/rg_drink"
+            android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_save"
+        android:id="@+id/btn_save2"
+        android:layout_below="@+id/sw_place"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClickBtnSave2" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Lab 4 Part 2</string>
+    <string name="hello_on_the_first_tab">Hello on the first Tab!</string>
+    <string name="arkadii_shatkovskyi">Arkadii Shatkovskyi</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose_type_of_animal">Choose type of animal</string>
+    <string name="rb_wild_animal">Wild animal</string>
+    <string name="rb_pet">Pet</string>
+    <string name="txt_name">Name:</string>
+    <string name="txt_animal">Animal</string>
+    <string name="rb_water">Water</string>
+    <string name="rb_milk">Milk</string>
+    <string name="tv_prefer_to_drink">Prefer to drink</string>
+    <string name="rb_carnivor">Carnivor</string>
+    <string name="rb_herbivore">Herbivore</string>
+    <string name="rb_omnivore">Omnivore</string>
+    <string name="tv_agresive_rate">Agresive rate</string>
+    <string name="btn_save">Save</string>
+    <string name="tv_elements">Elements</string>
+    <string name="name">Name:</string>
+    <string name="drink">Drink:</string>
+    <string name="living_place">Living place:</string>
+    <string name="wild_animal">Wild animal</string>
+</resources>

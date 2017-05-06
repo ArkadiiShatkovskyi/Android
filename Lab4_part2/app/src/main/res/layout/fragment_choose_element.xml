@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.arek.lab4_part2.ChooseElementFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/choose_type_of_animal"
+        android:id="@+id/textView_chooseAnimal"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/background_floating_material_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:id="@+id/radioGroup_choose"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_below="@+id/textView_chooseAnimal"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RadioButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_wild_animal"
+            android:id="@+id/radioButton"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+
+        <RadioButton
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="@string/rb_pet"
+            android:id="@+id/radioButton2"
+            android:checked="false"
+            android:layout_gravity="center_horizontal" />
+    </RadioGroup>
+</RelativeLayout>

@@ -1,0 +1,103 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WildElementFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/wild_animal"
+        android:id="@+id/textView14"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Animal:"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/textView14"
+        android:layout_toLeftOf="@+id/textView14"
+        android:layout_toStartOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="animal"
+        android:id="@+id/tv_animal_value"
+        android:layout_below="@+id/textView14"
+        android:layout_toRightOf="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Type:"
+        android:id="@+id/textView16"
+        android:layout_below="@+id/textView15"
+        android:layout_alignLeft="@+id/textView15"
+        android:layout_alignStart="@+id/textView15" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="type"
+        android:id="@+id/tv_type_value"
+        android:layout_below="@+id/tv_animal_value"
+        android:layout_toRightOf="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Living place:"
+        android:id="@+id/textView17"
+        android:layout_below="@+id/textView16"
+        android:layout_alignLeft="@+id/textView16"
+        android:layout_alignStart="@+id/textView16" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="living"
+        android:id="@+id/tv_living_place_value"
+        android:layout_alignTop="@+id/textView17"
+        android:layout_toRightOf="@+id/textView14"
+        android:layout_toEndOf="@+id/textView14" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Agresive rate:"
+        android:id="@+id/textView18"
+        android:layout_below="@+id/textView17"
+        android:layout_alignLeft="@+id/textView17"
+        android:layout_alignStart="@+id/textView17" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="agresive"
+        android:id="@+id/tv_agresive_value"
+        android:layout_below="@+id/tv_living_place_value"
+        android:layout_alignLeft="@+id/tv_living_place_value"
+        android:layout_alignStart="@+id/tv_living_place_value" />
+    </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

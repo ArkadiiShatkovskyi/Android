@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/screenSetting"
+    android:background="@drawable/bgd0"
+    tools:context="com.example.arek.lab3_czesc2.SettingsActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/txt_greeting_text"
+        android:id="@+id/txt_greeting_text"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_gretting"
+        android:layout_below="@+id/txt_greeting_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:spinnerMode="dropdown" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_save"
+        android:id="@+id/btn_save"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onClickSave" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_back"
+        android:id="@+id/btn_back2"
+        android:layout_alignBottom="@+id/btn_save"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="onClickBack" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/txt_backgrounds"
+        android:id="@+id/txt_color_of_greeting"
+        android:layout_below="@+id/spinner_gretting"
+        android:layout_centerHorizontal="true" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar_R"
+        android:max="255"
+        android:progress="255"
+        android:indeterminate="false"
+        android:layout_below="@+id/seekBar_G"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/seekBar_G"
+        android:layout_alignEnd="@+id/seekBar_G" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar_G"
+        android:max="255"
+        android:progress="255"
+        android:indeterminate="false"
+        android:layout_alignLeft="@+id/seekBar_B"
+        android:layout_alignStart="@+id/seekBar_B"
+        android:layout_below="@+id/seekBar_B"
+        android:layout_alignRight="@+id/seekBar_B"
+        android:layout_alignEnd="@+id/seekBar_B" />
+
+    <SeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar_B"
+        android:max="255"
+        android:progress="255"
+        android:indeterminate="false"
+        android:layout_below="@+id/txt_color_of_greeting"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/using_memory_for_saving"
+        android:id="@+id/textView"
+        android:layout_below="@+id/seekBar_R"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_choose_memory"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/background_image_text"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/spinner_choose_memory"
+        android:layout_alignRight="@+id/txt_color_of_greeting" />
+
+    <SeekBar
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar_backgournd_image"
+        android:max="6"
+        android:progress="0"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/btn_save" />
+
+</RelativeLayout>

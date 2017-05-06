@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.arek.lab4_part2.Fragment_Tab1">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/arkadii_shatkovskyi"
+        android:id="@+id/textView7"
+        android:layout_gravity="center_horizontal|top"
+        android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:text="@string/hello_on_the_first_tab"
+        android:layout_gravity="center_horizontal|top"
+        android:textColor="@color/background_material_dark"
+        android:id="@+id/textView"
+        android:layout_below="@+id/textView7"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="152dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_weight="0.16"
+        android:src="@drawable/hello"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

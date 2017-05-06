@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Lab3_czesc2</string>
+    <string name="txt_exit">Exit</string>
+    <string name="txt_menu">Menu</string>
+    <string name="txt_menu2">Menu:</string>
+    <string name="txt_back">Back</string>
+    <string name="txt_settings">Settings</string>
+    <string name="txt_add">Add animal</string>
+    <string name="txt_watch">Watch animals</string>
+    <string name="txt_settings2">Settings:</string>
+    <string name="txt_greeting_text">Greeting text:</string>
+    <string name="txt_save">Save</string>
+    <string name="txt_backgrounds">Backgrounds color:</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_animal">Animal</string>
+    <string name="txt_country">Country</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_add">Add</string>
+    <string name="txt_color">Color</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_lmadapter">Watch my list with images</string>
+    <string name="using_memory_for_saving">Using memory for saving:</string>
+    <string name="background_image_text">Background image</string>
+</resources>
