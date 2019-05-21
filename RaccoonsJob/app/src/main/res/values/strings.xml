@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Raccoon Job</string>
+    <string name="sign_in">Sign In</string>
+    <string name="offline_mode">Offline mode</string>
+    <string name="email_address">Email address</string>
+    <string name="password">Password</string>
+</resources>
