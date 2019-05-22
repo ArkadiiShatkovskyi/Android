@@ -4,4 +4,7 @@
     <string name="offline_mode">Offline mode</string>
     <string name="email_address">Email address</string>
     <string name="password">Password</string>
+    <string name="start_time">Start time</string>
+    <string name="end_time">End time</string>
+    <string name="add">Add</string>
 </resources>

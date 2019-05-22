@@ -39,7 +39,7 @@
                 android:text="@string/offline_mode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/radioButton3"
+                android:id="@+id/offlineModeRadio"
                 android:layout_weight="1"
                 android:button="@android:color/transparent"
                 android:background="@drawable/right_corner"
