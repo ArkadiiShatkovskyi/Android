@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.radio_group
 import kotlinx.android.synthetic.main.activity_offline_mode.*
 import java.text.DateFormat
@@ -51,9 +52,7 @@ class OfflineModeActivity : AppCompatActivity() {
         val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
             strTime.text = h.toString() + " : " + m.toString()
             //Toast.makeText(this, h.toString() + " : " + m +" : " , Toast.LENGTH_LONG).show()
-
-        }),hour,minute,false)
-
+        }),hour,minute,true)
         tpd.show()
     }
 
@@ -62,13 +61,37 @@ class OfflineModeActivity : AppCompatActivity() {
         val c = Calendar.getInstance()
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
-
-        val tpd = TimePickerDialog(this,TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
+        val tpd = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener(function = { view, h, m ->
             endTime.text = h.toString() + " : " + m.toString()
-            //Toast.makeText(this, h.toString() + " : " + m +" : " , Toast.LENGTH_LONG).show()
-
-        }),hour,minute,false)
-
+        }), hour, minute,true)
         tpd.show()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun addHours(view:View) {
+        val startTime = strTime.text
+        val endTime = endTime.text
+
+        val startHour = startTime.toString().substringBefore(':').toDouble()
+        val startMinutes = startTime.toString().substringAfter(':').toDouble()
+        val endHour = endTime.toString().substringBefore(':').toDouble()
+        val endMinutes = endTime.toString().substringAfter(':').toDouble()
+
+        val time = convertTime(startHour, startMinutes, endHour, endMinutes)
+        Toast.makeText(this, time, Toast.LENGTH_LONG).show()
+    }
+
+    private fun convertTime(stHour: Double?, stMinutes: Double?, endHour: Double?, endMinutes: Double?): String? {
+        val converterStartMinutes = stMinutes?.div(60)
+        val convertedEndMinutes = endMinutes?.div(60)
+
+        val startTime = stHour?.plus(converterStartMinutes!!)
+        val endTime = endHour?.plus(convertedEndMinutes!!)
+
+        return if(endHour == 0.0){
+            "Worked time: " + 24.0?.minus(startTime!!).toString()
+        }else{
+            "Worked time: " + endTime?.minus(startTime!!).toString()
+        }
     }
 }
