@@ -1,23 +1,32 @@
 package com.example.raccoonjob
 
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.annotation.RequiresApi
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.radio_group
 import kotlinx.android.synthetic.main.activity_offline_mode.*
+import java.io.BufferedReader
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.InputStreamReader
 import java.text.DateFormat
 import java.util.*
 
 
 class OfflineModeActivity : AppCompatActivity() {
+
+    private val file:String = "HoursData"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +50,29 @@ class OfflineModeActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         // do something
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        getMenuInflater().inflate(R.menu.menu_offline_mode, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle presses on the action bar menu items
+        when (item.itemId) {
+            R.id.showData -> {
+                val data = readData()
+                if(data != "") Toast.makeText(this, data, Toast.LENGTH_LONG).show()
+                else Toast.makeText(this, "Don't work yet :)", Toast.LENGTH_LONG).show()
+                return true
+            }
+            R.id.clearData -> {
+                crearData()
+                Toast.makeText(this, "Hours deleted", Toast.LENGTH_LONG).show()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -78,7 +110,9 @@ class OfflineModeActivity : AppCompatActivity() {
         val endMinutes = endTime.toString().substringAfter(':').toDouble()
 
         val time = convertTime(startHour, startMinutes, endHour, endMinutes)
-        Toast.makeText(this, time, Toast.LENGTH_LONG).show()
+        val workTime = dateEditText.text.toString() + "|" + time.toString()
+        Toast.makeText(this, workTime, Toast.LENGTH_LONG).show()
+        saveData(workTime)
     }
 
     private fun convertTime(stHour: Double?, stMinutes: Double?, endHour: Double?, endMinutes: Double?): String? {
@@ -89,9 +123,45 @@ class OfflineModeActivity : AppCompatActivity() {
         val endTime = endHour?.plus(convertedEndMinutes!!)
 
         return if(endHour == 0.0){
-            "Worked time: " + 24.0?.minus(startTime!!).toString()
+            startTime.toString() + "-" + endTime.toString() + "|" + 24.0?.minus(startTime!!).toString()
         }else{
-            "Worked time: " + endTime?.minus(startTime!!).toString()
+            startTime.toString() + "-" + endTime.toString() + "|" + endTime?.minus(startTime!!).toString()
+        }
+    }
+
+    private fun saveData(data: String?){
+        var tempData:String = readData()
+        tempData = tempData + " \n" + data
+        val fileOutputStream: FileOutputStream
+        try {
+            fileOutputStream = openFileOutput(file, Context.MODE_PRIVATE)
+            fileOutputStream.write(tempData.toByteArray())
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun readData(): String {
+        var fileInputStream: FileInputStream?
+        fileInputStream = openFileInput(file)
+        var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
+        val bufferedReader: BufferedReader = BufferedReader(inputStreamReader)
+        val stringBuilder: StringBuilder = StringBuilder()
+        var text: String? = null
+        while ({ text = bufferedReader.readLine(); text }() != null) {
+            stringBuilder.append(text)
+        }
+        return stringBuilder.toString()
+    }
+
+    private fun crearData(){
+        val data = ""
+        val fileOutputStream: FileOutputStream
+        try {
+            fileOutputStream = openFileOutput(file, Context.MODE_PRIVATE)
+            fileOutputStream.write(data.toByteArray())
+        }catch (e: Exception){
+            e.printStackTrace()
         }
     }
 }
