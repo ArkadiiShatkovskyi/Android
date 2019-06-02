@@ -11,10 +11,7 @@ import android.support.annotation.RequiresApi
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main.radio_group
 import kotlinx.android.synthetic.main.activity_offline_mode.*
 import java.io.BufferedReader
 import java.io.FileInputStream
@@ -35,15 +32,6 @@ class OfflineModeActivity : AppCompatActivity() {
             // get your data here
         }
         setContentView(R.layout.activity_offline_mode)
-        radio_group.setOnCheckedChangeListener(
-            RadioGroup.OnCheckedChangeListener { group, checkedId ->
-                val radio: RadioButton = findViewById(checkedId)
-                if (radio.text == "Sign In"){
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-            })
-        //val date_n = DateFormat.getDateTimeInstance().format(Date())
         val date_n = DateFormat.getDateInstance().format(Date())
         dateEditText.setText(date_n.substring(0, date_n.length - 6))
     }
@@ -61,9 +49,14 @@ class OfflineModeActivity : AppCompatActivity() {
         // Handle presses on the action bar menu items
         when (item.itemId) {
             R.id.showData -> {
+                val intent = Intent(this, DetailsActivity::class.java)
+                intent.putExtra("data", readData())
+                startActivity(intent)
+                /**
                 val data = readData()
                 if(data != "") Toast.makeText(this, data, Toast.LENGTH_LONG).show()
                 else Toast.makeText(this, "Don't work yet :)", Toast.LENGTH_LONG).show()
+                **/
                 return true
             }
             R.id.clearData -> {
@@ -119,6 +112,16 @@ class OfflineModeActivity : AppCompatActivity() {
         val converterStartMinutes = stMinutes?.div(60)
         val convertedEndMinutes = endMinutes?.div(60)
 
+        //val startM = BigDecimal(converterStartMinutes!!).setScale(2, RoundingMode.HALF_EVEN)
+        //val endM = BigDecimal(convertedEndMinutes!!).setScale(2, RoundingMode.HALF_EVEN)
+         /**
+          *
+          *
+          *
+          * round to 2 numbers after point ?!
+          *
+          *
+          * **/
         val startTime = stHour?.plus(converterStartMinutes!!)
         val endTime = endHour?.plus(convertedEndMinutes!!)
 
