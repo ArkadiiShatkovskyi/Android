@@ -24,6 +24,7 @@ import java.util.*
 class OfflineModeActivity : AppCompatActivity() {
 
     private val file:String = "HoursData"
+    private val fileRate:String = "Rate"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class OfflineModeActivity : AppCompatActivity() {
         val today = Date()
         val dateOut = dateFormatter.format(today)
         dateEditText.setText(dateOut.substring(0, dateOut.length - 5))
+        txtRate.setText(readRate())
     }
 
     override fun onBackPressed() {
@@ -53,6 +55,7 @@ class OfflineModeActivity : AppCompatActivity() {
             R.id.showData -> {
                 val intent = Intent(this, DetailsActivity::class.java)
                 intent.putExtra("data", readData())
+                intent.putExtra("rate", readRate())
                 startActivity(intent)
                 return true
             }
@@ -103,6 +106,10 @@ class OfflineModeActivity : AppCompatActivity() {
         val workTime = dateEditText.text.toString() + "|" + time.toString()
         Toast.makeText(this, workTime, Toast.LENGTH_LONG).show()
         saveData(workTime)
+
+        /** Saving rate **/
+        val rate = txtRate.text
+        saveRate(rate.toString())
     }
 
     private fun convertTime(stHour: Double?, stMinutes: Double?, endHour: Double?, endMinutes: Double?): String? {
@@ -119,6 +126,29 @@ class OfflineModeActivity : AppCompatActivity() {
     private fun convertMinutes(minutes: Double): Double{
         val result = minutes.div(60)
         return "%.2f".format(result).toDouble()
+    }
+
+    private fun saveRate(rate: String?){
+        val fileOutputStream: FileOutputStream
+        try {
+            fileOutputStream = openFileOutput(fileRate, Context.MODE_PRIVATE)
+            fileOutputStream.write(rate?.toByteArray())
+        }catch (e: Exception){
+            e.printStackTrace()
+        }
+    }
+
+    private fun readRate(): String?{
+        var fileInputStream: FileInputStream?
+        fileInputStream = openFileInput(fileRate)
+        var inputStreamReader: InputStreamReader = InputStreamReader(fileInputStream)
+        val bufferedReader: BufferedReader = BufferedReader(inputStreamReader)
+        val stringBuilder: StringBuilder = StringBuilder()
+        var text: String? = null
+        while ({ text = bufferedReader.readLine(); text }() != null) {
+            stringBuilder.append(text)
+        }
+        return stringBuilder.toString()
     }
 
     private fun saveData(data: String?){
