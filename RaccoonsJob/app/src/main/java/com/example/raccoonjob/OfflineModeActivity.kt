@@ -1,9 +1,10 @@
 package com.example.raccoonjob
 
+import android.app.AlertDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
-import android.icu.util.Calendar
+import java.util.Calendar
 import android.os.Build
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,10 +14,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_offline_mode.*
-import java.io.BufferedReader
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.InputStreamReader
+import java.io.*
 import java.text.DateFormat
 import java.util.*
 
@@ -38,10 +36,25 @@ class OfflineModeActivity : AppCompatActivity() {
         val dateOut = dateFormatter.format(today)
         dateEditText.setText(dateOut.substring(0, dateOut.length - 5))
         txtRate.setText(readRate())
+
+        calendarDate.setOnDateChangeListener { view, year, month, dayOfMonth ->
+            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
+            val msg = convertNumber(dayOfMonth) + "." + convertNumber((month + 1))
+            dateEditText.setText(msg)
+        }
     }
 
     override fun onBackPressed() {
-        // do something
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("")
+        builder.setMessage("Are you sure?")
+        builder.setPositiveButton("Yes"){dialog, which ->
+            System.exit(1)
+        }
+
+        builder.setNegativeButton("No"){dialog,which ->}
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -50,7 +63,6 @@ class OfflineModeActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle presses on the action bar menu items
         when (item.itemId) {
             R.id.showData -> {
                 val intent = Intent(this, DetailsActivity::class.java)
@@ -60,8 +72,17 @@ class OfflineModeActivity : AppCompatActivity() {
                 return true
             }
             R.id.clearData -> {
-                crearData()
-                Toast.makeText(this, "Hours deleted", Toast.LENGTH_LONG).show()
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("Clear data")
+                builder.setMessage("Do you want to clear data?")
+                builder.setPositiveButton("Yes"){dialog, which ->
+                    clearData()
+                    Toast.makeText(this, "Hours deleted", Toast.LENGTH_LONG).show()
+                }
+
+                builder.setNegativeButton("No"){dialog,which ->}
+                val dialog: AlertDialog = builder.create()
+                dialog.show()
                 return true
             }
         }
@@ -70,6 +91,7 @@ class OfflineModeActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun startTimePicker(view: View) {
+
         val c = Calendar.getInstance()
         val hour = c.get(Calendar.HOUR)
         val minute = c.get(Calendar.MINUTE)
@@ -108,8 +130,7 @@ class OfflineModeActivity : AppCompatActivity() {
         saveData(workTime)
 
         /** Saving rate **/
-        val rate = txtRate.text
-        saveRate(rate.toString())
+        saveRate(txtRate.text.toString())
     }
 
     private fun convertTime(stHour: Double?, stMinutes: Double?, endHour: Double?, endMinutes: Double?): String? {
@@ -124,8 +145,10 @@ class OfflineModeActivity : AppCompatActivity() {
     }
 
     private fun convertMinutes(minutes: Double): Double{
-        val result = minutes.div(60)
-        return "%.2f".format(result).toDouble()
+        val temp = minutes.div(60)
+        //var result = "%.2f".format(temp).toDouble()
+        //return "%.2f".format(temp).toDouble()
+        return temp
     }
 
     private fun saveRate(rate: String?){
@@ -149,6 +172,7 @@ class OfflineModeActivity : AppCompatActivity() {
             stringBuilder.append(text)
         }
         return stringBuilder.toString()
+
     }
 
     private fun saveData(data: String?){
@@ -176,7 +200,7 @@ class OfflineModeActivity : AppCompatActivity() {
         return stringBuilder.toString()
     }
 
-    private fun crearData(){
+    private fun clearData(){
         val data = ""
         val fileOutputStream: FileOutputStream
         try {
@@ -185,5 +209,10 @@ class OfflineModeActivity : AppCompatActivity() {
         }catch (e: Exception){
             e.printStackTrace()
         }
+    }
+
+    private fun convertNumber(number: Int): String{
+        if(number < 10) return "0" + number.toString()
+        else return number.toString()
     }
 }
