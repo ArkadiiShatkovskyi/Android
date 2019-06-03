@@ -8,4 +8,7 @@
     <string name="end_time">End time</string>
     <string name="add">Add</string>
     <string name="hours">Hours</string>
+    <string name="hoursTxt">Hours:</string>
+    <string name="money">Money:</string>
+    <string name="_0">0</string>
 </resources>

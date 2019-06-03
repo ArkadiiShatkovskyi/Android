@@ -32,8 +32,10 @@ class OfflineModeActivity : AppCompatActivity() {
             // get your data here
         }
         setContentView(R.layout.activity_offline_mode)
-        val date_n = DateFormat.getDateInstance().format(Date())
-        dateEditText.setText(date_n.substring(0, date_n.length - 6))
+        val dateFormatter = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.GERMANY)
+        val today = Date()
+        val dateOut = dateFormatter.format(today)
+        dateEditText.setText(dateOut.substring(0, dateOut.length - 5))
     }
 
     override fun onBackPressed() {
@@ -52,11 +54,6 @@ class OfflineModeActivity : AppCompatActivity() {
                 val intent = Intent(this, DetailsActivity::class.java)
                 intent.putExtra("data", readData())
                 startActivity(intent)
-                /**
-                val data = readData()
-                if(data != "") Toast.makeText(this, data, Toast.LENGTH_LONG).show()
-                else Toast.makeText(this, "Don't work yet :)", Toast.LENGTH_LONG).show()
-                **/
                 return true
             }
             R.id.clearData -> {
@@ -109,27 +106,19 @@ class OfflineModeActivity : AppCompatActivity() {
     }
 
     private fun convertTime(stHour: Double?, stMinutes: Double?, endHour: Double?, endMinutes: Double?): String? {
-        val converterStartMinutes = stMinutes?.div(60)
-        val convertedEndMinutes = endMinutes?.div(60)
-
-        //val startM = BigDecimal(converterStartMinutes!!).setScale(2, RoundingMode.HALF_EVEN)
-        //val endM = BigDecimal(convertedEndMinutes!!).setScale(2, RoundingMode.HALF_EVEN)
-         /**
-          *
-          *
-          *
-          * round to 2 numbers after point ?!
-          *
-          *
-          * **/
-        val startTime = stHour?.plus(converterStartMinutes!!)
-        val endTime = endHour?.plus(convertedEndMinutes!!)
+        val startTime = stHour?.plus(convertMinutes(stMinutes!!))
+        val endTime = endHour?.plus(convertMinutes(endMinutes!!))
 
         return if(endHour == 0.0){
-            startTime.toString() + "-" + endTime.toString() + "|" + 24.0?.minus(startTime!!).toString()
+            startTime.toString() + "-" + endTime.toString() + "/" + 24.0?.minus(startTime!!).toString()
         }else{
-            startTime.toString() + "-" + endTime.toString() + "|" + endTime?.minus(startTime!!).toString()
+            startTime.toString() + "-" + endTime.toString() + "/" + endTime?.minus(startTime!!).toString()
         }
+    }
+
+    private fun convertMinutes(minutes: Double): Double{
+        val result = minutes.div(60)
+        return "%.2f".format(result).toDouble()
     }
 
     private fun saveData(data: String?){

@@ -14,8 +14,39 @@ class DetailsActivity : AppCompatActivity() {
             dataH = intent.getStringExtra("data")
         }
         setContentView(R.layout.activity_details)
+        showInfo(dataH)
+    }
 
-        txtHours.text = dataH.toString()
+    private fun showInfo(text: String){
+        txtHours.text = editText(text)
+        textViewHours.text = countHours(text).toString()
+        textViewMoney.text = countMoney(text, 13).toString()
+    }
 
+    private fun editText(text: String?): String{
+        var result = ""
+        for(str: String in getDataList(text!!)){
+            result += str + "\n"
+        }
+        return result
+    }
+
+    private fun getDataList(text: String): List<String>{
+        return text?.split(" ")
+    }
+
+    private fun countHours(text: String): Double{
+        var result = 0.0
+        for(l: String in getDataList(text)){
+            val hour = l.substringAfter("/")
+            if(hour != ""){
+                result = result.plus(hour.toDouble())
+            }
+        }
+        return result
+    }
+
+    private fun countMoney(text: String, rate: Int): Double{
+        return countHours(text) * rate
     }
 }
