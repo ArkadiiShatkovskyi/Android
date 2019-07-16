@@ -19,6 +19,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_calendar: ^0.0.8
+  keyboard_avoider: ^0.1.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -53,6 +55,7 @@ flutter:
     - assets/images/bckg3.jpg
     - assets/images/img1.jpg
     - assets/images/aboutImage.jpg
+    - assets/images/user.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

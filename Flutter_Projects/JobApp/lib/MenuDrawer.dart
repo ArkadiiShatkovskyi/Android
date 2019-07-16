@@ -50,6 +50,7 @@ class MenuDrawer extends StatelessWidget{
           children: <Widget>[
             _drawerStyle(),
             DrawerCard("Login", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.account_circle),
+            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.insert_invitation),
             DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.settings),
             DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.info),
             DrawerCard("Exit", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.exit_to_app),
@@ -62,6 +63,7 @@ class MenuDrawer extends StatelessWidget{
             _drawerStyle(),
             DrawerCard("Login", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.account_circle),
             DrawerCard("Calendar", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.calendar_today),
+            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.insert_invitation),
             DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.settings),
             DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.info),
             DrawerCard("Exit", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.exit_to_app),

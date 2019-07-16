@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'TextControl.dart';
+import 'CalendarView.dart';
 
 class InfoWidget extends StatelessWidget{
   final Color titleColor;
@@ -41,6 +41,9 @@ class InfoWidget extends StatelessWidget{
                             image: AssetImage("assets/images/aboutImage.jpg"),
                           ),
                         ),
+                      ),
+                      new Divider(
+                        height: 40.0,
                       ),
                       Card(
                           elevation: 0,
