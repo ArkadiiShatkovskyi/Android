@@ -16,11 +16,11 @@ class MenuDrawer extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: getList(),
+        child: _getList(),
     );
   }
 
-  Container drawerStyle(){
+  Container _drawerStyle(){
       return Container(
         height: 150.0,
         child: DrawerHeader(
@@ -43,12 +43,12 @@ class MenuDrawer extends StatelessWidget{
       );
   }
 
-  ListView getList(){
+  ListView _getList(){
     if(this.menuItem == 2) {
       return ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            drawerStyle(),
+            _drawerStyle(),
             DrawerCard("Login", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.account_circle),
             DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.settings),
             DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.info),
@@ -59,7 +59,7 @@ class MenuDrawer extends StatelessWidget{
       return ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            drawerStyle(),
+            _drawerStyle(),
             DrawerCard("Login", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.account_circle),
             DrawerCard("Calendar", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.calendar_today),
             DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.settings),

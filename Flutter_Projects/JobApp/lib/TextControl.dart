@@ -16,8 +16,9 @@ class _WidgetState extends State<TextControl>{
           home: WillPopScope(
             onWillPop: () async => false,
             child: Scaffold(
+              drawer: MenuDrawer(2),
               appBar: AppBar(
-                title: Text("Test here :)"),
+                title: Text("Calendar"),
                 backgroundColor: Colors.lightBlueAccent,
               ),
               body: Container(
@@ -30,9 +31,8 @@ class _WidgetState extends State<TextControl>{
                     ),
                  **/
               ),
-              drawer: MenuDrawer(2),
             ),
           )
-        );
+    );
   }
 }

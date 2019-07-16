@@ -32,14 +32,14 @@ class DrawerCard extends StatelessWidget{
           if(text == "About"){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InfoWidget(iconsColor)));
           }else if(text == "Exit"){
-            showExitDialon(context);
+            _showExitDialon(context);
           }
         }
     ),
     );
   }
 
-  void showExitDialon(BuildContext context){
+  void _showExitDialon(BuildContext context){
     showDialog(context: context,
         builder: (BuildContext context){
           return AlertDialog(
