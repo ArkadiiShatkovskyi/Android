@@ -30,7 +30,7 @@ class DrawerCard extends StatelessWidget{
         ),
         onTap:(){
           if(text == "About"){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => InfoWidget(iconsColor)));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InfoWidget(iconsColor)));
           }else if(text == "Exit"){
             showExitDialon(context);
           }
@@ -64,5 +64,4 @@ class DrawerCard extends StatelessWidget{
         }
     );
   }
-
 }

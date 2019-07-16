@@ -13,21 +13,26 @@ class _WidgetState extends State<TextControl>{
   Widget build(BuildContext context) {
     return MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: Scaffold(
-            appBar: AppBar(
+          home: WillPopScope(
+            onWillPop: () async => false,
+            child: Scaffold(
+              appBar: AppBar(
                 title: Text("Test here :)"),
                 backgroundColor: Colors.lightBlueAccent,
-            ),
-            body: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
+              ),
+              body: Container(
+                /**
+                    decoration: BoxDecoration(        ///Background
+                    image: DecorationImage(
                     image: AssetImage(bcgImage),
                     fit: BoxFit.cover
-                  )
+                    )
+                    ),
+                 **/
               ),
+              drawer: MenuDrawer(2),
             ),
-            drawer: MenuDrawer(),
-          ),
+          )
         );
   }
 }
