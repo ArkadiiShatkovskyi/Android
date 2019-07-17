@@ -11,6 +11,7 @@ class TextControl  extends StatefulWidget{
 class _WidgetState extends State<TextControl>{
   final String bcgImage = "assets/images/bckg3.jpg";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  DateTime selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class _WidgetState extends State<TextControl>{
 
   Container _getBottomSheet(){
     return Container(
-        height: 200,
+        height: 300,
         alignment: Alignment.center,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -72,14 +73,14 @@ class _WidgetState extends State<TextControl>{
               child: Row(
                 children: <Widget>[
                   new RaisedButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50.0),
+                    padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0, bottom: 20.0),
                     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                    onPressed: () {},
+                    onPressed: () => _selectDate(context),
                     child: const Text('Start time'),
                   ),
                   Spacer(flex: 2),
                   new RaisedButton(
-                    padding: EdgeInsets.symmetric(horizontal: 50.0),
+                    padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0, bottom: 20.0),
                     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                     onPressed: () {},
                     child: const Text('End time'),
@@ -90,5 +91,17 @@ class _WidgetState extends State<TextControl>{
           ],
         )
     );
+  }
+
+  Future<Null> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2050));
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
   }
 }
