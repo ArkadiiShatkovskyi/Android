@@ -18,7 +18,7 @@ class _LogInSignUpState extends State<LogInPage>{
           onWillPop: () async => false,
           child: Scaffold(
             appBar: AppBar(
-              title: Text("Log in"),
+              title: Text("Sign in"),
               backgroundColor: styleColor,
             ),
             body: Center(
@@ -109,7 +109,7 @@ class _LogInSignUpState extends State<LogInPage>{
 
   Widget _showSecondButton(){
     return new FlatButton(
-      child: new Text('Have an account? Sign in',
+      child: new Text('Create an account',
           style:
           new TextStyle(fontSize: 14.0, fontWeight: FontWeight.w300)),
       onPressed: (){}
