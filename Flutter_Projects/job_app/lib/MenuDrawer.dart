@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'DrawerCard.dart';
+import 'package:job_app/pages/DrawerCard.dart';
 import 'StyleSettings.dart';
 
 class MenuDrawer extends StatelessWidget{

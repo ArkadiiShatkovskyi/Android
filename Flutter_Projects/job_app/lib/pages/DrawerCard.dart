@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'InfoView.dart';
-import 'LogInView.dart';
+import 'package:job_app/pages/InfoPage.dart';
+import 'package:job_app/pages/LogInPage.dart';
 
 class DrawerCard extends StatelessWidget{
   final String drawerFont;
@@ -34,7 +34,7 @@ class DrawerCard extends StatelessWidget{
           if(text == "About"){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InfoWidget()));
           }else if(text == "Login"){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LogInView()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LogInPage()));
           }else if(text == "Exit"){
             _showExitDialon(context);
           }

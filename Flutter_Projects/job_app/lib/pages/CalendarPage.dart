@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'MenuDrawer.dart';
-import 'CalendarWidget.dart';
+import 'package:job_app/MenuDrawer.dart';
+import 'package:job_app/CalendarWidget.dart';
 import 'package:ant_icons/ant_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'StyleSettings.dart';
+import 'package:job_app/StyleSettings.dart';
 
 class TextControl  extends StatefulWidget{
   @override
@@ -41,7 +41,7 @@ class _WidgetState extends State<TextControl>{
               ],
               ),
               /*body: StreamBuilder(
-                    stream: Firestore.instance.collection('workHoursDB').snapshots(),
+                    stream: Firestore.instance.collection('hoursDB').snapshots(),
                     builder: (context, snapshot){
                       if(!snapshot.hasData) return const Text('Loading...');
                       return ListView.builder(
@@ -129,7 +129,7 @@ class _WidgetState extends State<TextControl>{
           ),
           Expanded(
             child: Text(
-              document['startHour'].toString(),
+              document['strHour'].toString(),
             ),
           ),
           Expanded(
