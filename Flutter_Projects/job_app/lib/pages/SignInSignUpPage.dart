@@ -64,7 +64,7 @@ class _LogInSignUpState extends State<SignInSignUp>{
 
   Widget _showCircularProgress(){
     if (_isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(styleColor)));
     } return Container(height: 0.0, width: 0.0,);
 
   }
