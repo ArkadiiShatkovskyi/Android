@@ -16,18 +16,10 @@ class InfoWidget extends StatelessWidget{
                 title: Text("About"),
                 backgroundColor: styleColor,
                 leading: IconButton(icon:Icon(Icons.arrow_back),
-                  onPressed:() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TextControl())),
+                  onPressed:() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage())),
                 )
             ),
             body: Container(
-              /**                                                ///BACKGROUND
-                  decoration: BoxDecoration(
-                  image: DecorationImage(
-                  image: AssetImage("assets/images/bckg3.jpg"),
-                  fit: BoxFit.cover
-                  )
-                  ),
-               */
                 child: ListView(
                     padding: EdgeInsets.all(15.0),
                     children: <Widget>[

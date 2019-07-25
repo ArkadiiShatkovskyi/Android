@@ -6,12 +6,12 @@ import 'package:ant_icons/ant_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/StyleSettings.dart';
 
-class TextControl  extends StatefulWidget{
+class CalendarPage  extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => _WidgetState();
 }
 
-class _WidgetState extends State<TextControl>{
+class _WidgetState extends State<CalendarPage>{
   final String bcgImage = "assets/images/bckg3.jpg";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
@@ -19,50 +19,50 @@ class _WidgetState extends State<TextControl>{
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: WillPopScope(
-            onWillPop: () async => false,
-            child: Scaffold(
-              drawer: MenuDrawer(2),
-              appBar: AppBar(
-                title: Text("Calendar"),
-                backgroundColor: styleColor,
-              ),
-              body: ListView(children: <Widget>[
-                Container(
-                  foregroundDecoration: BoxDecoration(color: Colors.transparent),
-                  width: 300,
-                  height: 300,
-                  margin: EdgeInsets.only(bottom: 20),
-                  child: Image(
-                    image: AssetImage("assets/images/undraw_calendar_dutt.png"),
+      debugShowCheckedModeBanner: false,
+      home: WillPopScope(
+        onWillPop: () async => false,
+        child:Scaffold(
+                drawer: MenuDrawer(2),
+                appBar: AppBar(
+                  title: Text("Calendar"),
+                  backgroundColor: styleColor,
+                ),
+                body: ListView(children: <Widget>[
+                  Container(
+                    foregroundDecoration: BoxDecoration(color: Colors.transparent),
+                    width: 300,
+                    height: 300,
+                    margin: EdgeInsets.only(bottom: 20),
+                    child: Image(
+                      image: AssetImage("assets/images/undraw_calendar_dutt.png"),
+                    ),
                   ),
+                ],
                 ),
-              ],
-              ),
-              /*body: StreamBuilder(
-                    stream: Firestore.instance.collection('hoursDB').snapshots(),
-                    builder: (context, snapshot){
-                      if(!snapshot.hasData) return const Text('Loading...');
-                      return ListView.builder(
-                        itemCount: snapshot.data.documents.length,
-                          itemBuilder: (context, index) =>
-                            _buildListItem(context, snapshot.data.documents[index]),
-                      );
-                    }),*/
-              key: scaffoldKey,
-              floatingActionButton: FloatingActionButton(
-                backgroundColor: styleColor,
-                child: Center(
-                    child:Icon(AntIcons.form)
+                /*body: StreamBuilder(
+                      stream: Firestore.instance.collection('hoursDB').snapshots(),
+                      builder: (context, snapshot){
+                        if(!snapshot.hasData) return const Text('Loading...');
+                        return ListView.builder(
+                          itemCount: snapshot.data.documents.length,
+                            itemBuilder: (context, index) =>
+                              _buildListItem(context, snapshot.data.documents[index]),
+                        );
+                      }),*/
+                key: scaffoldKey,
+                floatingActionButton: FloatingActionButton(
+                  backgroundColor: styleColor,
+                  child: Center(
+                      child:Icon(AntIcons.form)
+                  ),
+                  onPressed: () {
+                    scaffoldKey.currentState
+                        .showBottomSheet((context) => _getBottomSheet());
+                  }
                 ),
-                onPressed: () {
-                  scaffoldKey.currentState
-                      .showBottomSheet((context) => _getBottomSheet());
-                }
               ),
             ),
-          )
     );
   }
 
