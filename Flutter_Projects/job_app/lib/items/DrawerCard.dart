@@ -33,10 +33,10 @@ class DrawerCard extends StatelessWidget{
         onTap:(){
           if(text == "About"){
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => InfoWidget()));
-          }else if(text == "Login"){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInSignUp()));
-          }else if(text == "Exit"){
-            _showExitDialon(context);
+          }else if(text == "Account"){
+            //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInSignUp()));
+          }else if(text == "Log out"){
+            //_showExitDialon(context);
           }
         }
     ),
