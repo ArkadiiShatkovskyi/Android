@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:job_app/items/DrawerCard.dart';
 import 'package:job_app/StyleSettings.dart';
+import 'package:ant_icons/ant_icons.dart';
 
 class MenuDrawer extends StatelessWidget{
   final String drawerFont = 'CourgetteRegular';
@@ -29,6 +30,7 @@ class MenuDrawer extends StatelessWidget{
             child: Center(
               child: Text("Menu",
                 style: TextStyle(
+                  color: Colors.white,
                   fontFamily: drawerFont,
                   fontSize: titleDrawerSize,
                 ),
@@ -44,11 +46,11 @@ class MenuDrawer extends StatelessWidget{
           children: <Widget>[
             _drawerStyle(),
             Divider(height: 10, color: Colors.transparent),
-//            DrawerCard("Account", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.account_circle),        //not added
-//            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.insert_invitation),     //not added
-//            DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.settings),             //not added
-            DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.info),
-            DrawerCard("Log out", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.exit_to_app),           //modify
+            DrawerCard("Account", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.user),        //not added
+            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.table),     //not added
+            DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.setting_outline),             //not added
+            DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.info_circle_outline),
+            DrawerCard("Close", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.close_square_outline),           //modify
           ]
       );
       }else{
@@ -57,12 +59,12 @@ class MenuDrawer extends StatelessWidget{
           children: <Widget>[
             Divider(height: 50, color: styleColor),
             _drawerStyle(),
-//            DrawerCard("Account", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.account_circle),        //not added
-            DrawerCard("Calendar", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.calendar_today),
-//            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.insert_invitation),     //not added
-//            DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.settings),             //not added
-            DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.info),
-            DrawerCard("Log out", iconsColor, drawerFont, iconsSize, tilesFontSize, Icons.exit_to_app),           //modify
+            DrawerCard("Account", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.user),        //not added
+            DrawerCard("Calendar", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.calendar_outline),
+            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.table),     //not added
+            DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.setting_outline),             //not added
+            DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.info_circle_outline),
+            DrawerCard("Close", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.close_square_outline),           //modify
           ]
       );
     }
