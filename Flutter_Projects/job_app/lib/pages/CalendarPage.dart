@@ -5,6 +5,10 @@ import 'package:job_app/items/CalendarWidget.dart';
 import 'package:ant_icons/ant_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/StyleSettings.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:job_app/pages/SignInSignUpPage.dart';
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class CalendarPage  extends StatefulWidget{
   @override
@@ -27,6 +31,11 @@ class _WidgetState extends State<CalendarPage>{
                 appBar: AppBar(
                   title: Text("Calendar"),
                   backgroundColor: styleColor,
+                  actions: <Widget>[
+                    new FlatButton(
+                        child: new Icon(AntIcons.logout_outline, color: Colors.white),
+                        onPressed: _signOut)
+                  ],
                 ),
                 body: ListView(children: <Widget>[
                   /*Container(
@@ -65,6 +74,27 @@ class _WidgetState extends State<CalendarPage>{
               ),
             ),
     );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
+   void _signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      //await widget.auth.signOut();
+    } catch (e) {
+      print(e);
+    }finally{
+      FirebaseAuth.instance.currentUser().then((firebaseUser){
+        if(firebaseUser == null)
+        {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  SignInSignUp()));
+        }
+      });
+    }
   }
 
   Container _getBottomSheet(){
