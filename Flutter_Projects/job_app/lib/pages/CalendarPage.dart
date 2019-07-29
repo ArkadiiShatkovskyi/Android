@@ -20,7 +20,7 @@ class _WidgetState extends State<CalendarPage>{
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
   bool _isLoading = false;
-  bool isUserData = false;
+  String user = null;
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +76,8 @@ class _WidgetState extends State<CalendarPage>{
 
   @override
   void initState(){
-    //super.initState();
-    isUserData = false;
+    super.initState();
+    _setUser();
   }
 
   Widget _getData(){
@@ -162,10 +162,7 @@ class _WidgetState extends State<CalendarPage>{
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-    /*_checkUser(document['user'].toString()).then((val){
-      setState(() { isUserData = true; });
-    });*/
-    if(!isUserData) return ListTile(
+    if(user != document['user']) return ListTile(
       title: Row(
           children: <Widget>[
             Text(""),
@@ -212,11 +209,9 @@ class _WidgetState extends State<CalendarPage>{
 
   }
 
-  Future<bool> _checkUser(String userDB) async {
+  Future<bool> _setUser() async {
     final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    final uid = user.uid;
-    if(uid == userDB) return true;
-    else return false;
+    this.user = user.uid;
   }
 
   Future<Null> _selectDate(BuildContext context) async {
