@@ -19,10 +19,17 @@ class _WidgetState extends State<CalendarPage>{
   final String bcgImage = "assets/images/bckg3.jpg";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
+  bool _isLoading = false;
+  bool isUserData = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+          //buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
+          //dialogTheme: DialogTheme(titleTextStyle: DialogTheme.),
+          accentColor: styleColor,
+          primaryColor: styleColor),
       debugShowCheckedModeBanner: false,
       home: WillPopScope(
         onWillPop: () async => false,
@@ -37,7 +44,8 @@ class _WidgetState extends State<CalendarPage>{
                         onPressed: _signOut)
                   ],
                 ),
-                body: ListView(children: <Widget>[
+                body: _getData(),
+//                ListView(children: <Widget>[
                   /*Container(
                     foregroundDecoration: BoxDecoration(color: Colors.transparent),
                     width: 300,
@@ -47,19 +55,9 @@ class _WidgetState extends State<CalendarPage>{
                       image: AssetImage("assets/images/undraw_calendar_dutt.png"),
                     ),
                   ),*/
-                  Center(child:Text(' CALENDAR PAGE ')),
-                ],
-                ),
-                /*body: StreamBuilder(
-                      stream: Firestore.instance.collection('hoursDB').snapshots(),
-                      builder: (context, snapshot){
-                        if(!snapshot.hasData) return const Text('Loading...');
-                        return ListView.builder(
-                          itemCount: snapshot.data.documents.length,
-                            itemBuilder: (context, index) =>
-                              _buildListItem(context, snapshot.data.documents[index]),
-                        );
-                      }),*/
+//                  Center(child:Text(' CALENDAR PAGE ')),
+//                ],
+//                ),
                 key: scaffoldKey,
                 floatingActionButton: FloatingActionButton(
                   backgroundColor: styleColor,
@@ -78,7 +76,21 @@ class _WidgetState extends State<CalendarPage>{
 
   @override
   void initState(){
-    super.initState();
+    //super.initState();
+    isUserData = false;
+  }
+
+  Widget _getData(){
+    return StreamBuilder(
+        stream: Firestore.instance.collection('hoursDB').snapshots(),
+        builder: (context, snapshot){
+          if(!snapshot.hasData) return const Text('Loading...');
+          return ListView.builder(
+            itemCount: snapshot.data.documents.length,
+            itemBuilder: (context, index) =>
+                _buildListItem(context, snapshot.data.documents[index]),
+          );
+        });
   }
 
    void _signOut() async {
@@ -150,6 +162,16 @@ class _WidgetState extends State<CalendarPage>{
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
+    /*_checkUser(document['user'].toString()).then((val){
+      setState(() { isUserData = true; });
+    });*/
+    if(!isUserData) return ListTile(
+      title: Row(
+          children: <Widget>[
+            Text(""),
+          ]
+      )
+    );
     return ListTile(
       title: Row(
         children: <Widget>[
@@ -183,8 +205,23 @@ class _WidgetState extends State<CalendarPage>{
     );
   }
 
+  Widget _showCircularProgress(){
+    if (_isLoading) {
+      return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(styleColor)));
+    } return Container(height: 0.0, width: 0.0,);
+
+  }
+
+  Future<bool> _checkUser(String userDB) async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final uid = user.uid;
+    if(uid == userDB) return true;
+    else return false;
+  }
+
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
+        initialDatePickerMode: DatePickerMode.day,
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2015, 8),
