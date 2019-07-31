@@ -4,11 +4,9 @@ import 'package:flutter/rendering.dart';
 import 'package:job_app/StyleSettings.dart';
 import 'package:ant_icons/ant_icons.dart';
 //import 'package:job_app/services/authentication.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:job_app/pages/CalendarPage.dart';
+import 'package:job_app/items/Authentication.dart';
 
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class SignInSignUp extends StatefulWidget{
   @override
@@ -19,7 +17,8 @@ enum FormMode { LOGIN, SIGNUP }
 
 class _LogInSignUpState extends State<SignInSignUp>{
 
-  FormMode _formMode = FormMode.LOGIN;
+  FormMode _formMode;
+  DBConnect _db = new DBConnect();
 
   String _pageText = "Sign In";
   String _secondButtonText = "Create an account";
@@ -55,7 +54,8 @@ class _LogInSignUpState extends State<SignInSignUp>{
   @override
   void initState(){
     super.initState();
-    getUser().then((user){
+    _formMode = FormMode.LOGIN;
+    _db.getUser().then((user){
       if(user != null){
         navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
       }
@@ -73,57 +73,37 @@ class _LogInSignUpState extends State<SignInSignUp>{
     setState(() {
       _isLoading = true;
     });
-    FirebaseUser user;
-    try{
-      user = await _auth.createUserWithEmailAndPassword(
-          email: _emailTextController.text,
-          password: _passwordTextController.text
-      );
-    }catch(e){
-      print(e.toString());
-    }finally{
-      if(user != null){
-        setState(() {
-          _formMode = FormMode.LOGIN;
-          _pageText = "Sign In";
-          _secondButtonText = "Create an account";
-        });
+    _db.signUpWithEmail(_emailTextController.text, _passwordTextController.text).then((answer){
+      if(answer == true){
+        Navigator.push(context ,MaterialPageRoute(builder: (context) => SignInSignUp()));
+        _formMode = FormMode.LOGIN;
       }else{
-        //pop up message "Try again"
+        //show message try again
       }
-    }
+    });
     setState(() {
       _isLoading = false;
     });
   }
 
   void signInWithEmail() async{
+    _db.setIsLoading();
     setState(() {
-      _isLoading = true;
+      _isLoading = _db.isLoading();
     });
-    FirebaseUser user;
-    try{
-      user = await _auth.signInWithEmailAndPassword(
-          email: _emailTextController.text,
-          password: _passwordTextController.text
-      );
-    }catch(e){
-      print(e.toString());
-    }finally{
-      if(user != null){
+    _db.signInWithEmail(_emailTextController.text, _passwordTextController.text, navigatorKey).then((answer){
+      if(answer == true){
         navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
-        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage()));
       }else{
-        //pop up message "Try again"
+        //show message try again
+        setState(() {
+          _isLoading = _db.isLoading();
+        });
       }
-    }
-    setState(() {
-      _isLoading = false;
     });
-  }
-
-  Future<FirebaseUser> getUser() async{
-    return await _auth.currentUser();
+    setState(() {
+      _isLoading = _db.isLoading();
+    });
   }
 
   Widget _showBody(){

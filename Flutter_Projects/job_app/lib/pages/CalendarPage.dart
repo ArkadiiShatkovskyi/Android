@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:job_app/items/MenuDrawer.dart';
-import 'package:job_app/items/CalendarWidget.dart';
+//import 'package:job_app/items/CalendarWidget.dart';
 import 'package:ant_icons/ant_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/StyleSettings.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:job_app/pages/SignInSignUpPage.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
+//import 'package:job_app/pages/SignInSignUpPage.dart';
+import 'package:job_app/items/Authentication.dart';
 
 class CalendarPage  extends StatefulWidget{
   @override
@@ -19,8 +17,9 @@ class _WidgetState extends State<CalendarPage>{
   final String bcgImage = "assets/images/bckg3.jpg";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
-  bool _isLoading = false;
-  String user = null;
+//  bool _isLoading = false;
+  String user;
+  DBConnect _db = new DBConnect();
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class _WidgetState extends State<CalendarPage>{
   @override
   void initState(){
     super.initState();
-    _setUser();
+    _db.getUser().then((currUser) {this.user = currUser.uid;});
   }
 
   Widget _getData(){
@@ -94,19 +93,7 @@ class _WidgetState extends State<CalendarPage>{
   }
 
    void _signOut() async {
-    try {
-      await FirebaseAuth.instance.signOut();
-      //await widget.auth.signOut();
-    } catch (e) {
-      print(e);
-    }finally{
-      FirebaseAuth.instance.currentUser().then((firebaseUser){
-        if(firebaseUser == null)
-        {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) =>  SignInSignUp()));
-        }
-      });
-    }
+    _db.signOut(context);
   }
 
   Container _getBottomSheet(){
@@ -202,17 +189,12 @@ class _WidgetState extends State<CalendarPage>{
     );
   }
 
-  Widget _showCircularProgress(){
+  /*Widget _showCircularProgress(){
     if (_isLoading) {
       return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(styleColor)));
     } return Container(height: 0.0, width: 0.0,);
 
-  }
-
-  Future<bool> _setUser() async {
-    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
-    this.user = user.uid;
-  }
+  }*/
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
