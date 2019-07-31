@@ -6,7 +6,7 @@ import 'package:ant_icons/ant_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/StyleSettings.dart';
 //import 'package:job_app/pages/SignInSignUpPage.dart';
-import 'package:job_app/items/Authentication.dart';
+import 'package:job_app/items/DatabaseManagement.dart';
 
 class CalendarPage  extends StatefulWidget{
   @override

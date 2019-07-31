@@ -5,7 +5,7 @@ import 'package:job_app/StyleSettings.dart';
 import 'package:ant_icons/ant_icons.dart';
 //import 'package:job_app/services/authentication.dart';
 import 'package:job_app/pages/CalendarPage.dart';
-import 'package:job_app/items/Authentication.dart';
+import 'package:job_app/items/DatabaseManagement.dart';
 
 
 class SignInSignUp extends StatefulWidget{
