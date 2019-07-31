@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:job_app/items/MenuDrawer.dart';
+import 'package:job_app/pageElements/MenuDrawer.dart';
 //import 'package:job_app/items/CalendarWidget.dart';
 import 'package:ant_icons/ant_icons.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:job_app/StyleSettings.dart';
+import 'package:job_app/items/StyleSettings.dart';
 //import 'package:job_app/pages/SignInSignUpPage.dart';
 import 'package:job_app/items/DatabaseManagement.dart';
 

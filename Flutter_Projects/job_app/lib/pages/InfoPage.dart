@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:job_app/pages/CalendarPage.dart';
-import 'package:job_app/StyleSettings.dart';
+import 'package:job_app/items/StyleSettings.dart';
 
 class InfoWidget extends StatelessWidget{
   final String bcgImage = null;
