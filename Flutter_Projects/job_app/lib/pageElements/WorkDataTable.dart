@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/items/Authorization.dart';
 
-// ignore: must_be_immutable
 class WorkDataTable extends StatefulWidget{
 
   @override
@@ -15,69 +14,52 @@ class _WorkDataTableState extends State<WorkDataTable>{
   DBConnect _db = new DBConnect();
 
   @override
-  void initState(){
-    super.initState();
-    _db.getUser().then((currUser) {this._user = currUser.uid;});
-  }
+        void initState(){
+      super.initState();
+      _db.getUser().then((currUser) {this._user = currUser.uid;});
+    }
 
   @override
   Widget build(BuildContext context) {
-    double width = 20;
-    return new ListView(
-      children: <Widget>[
-        Container(
-        child:Row(
-          children: [
-            Center(child: const Text("Date")),
-            Container(width: width),
-            Center(child: const Text("Start time")),
-            Container(width: width),
-            Center(child: const Text("End time")),
-            Container(width: width),
-            Center(child: const Text("Rate")),
-            Container(width: width),
-            Center(child: const Text("Worked time")),
-          ],
-        ),
-        padding: new EdgeInsets.only(left: 30, right: 30),
-      ),
-        getRows(width + 15),
-    ]);
-  }
-
-  Widget getRows(width){
     return StreamBuilder(
-        stream: Firestore.instance.collection('hoursDB').snapshots(),
+        stream: Firestore.instance.collection('hoursDB').where('user', isEqualTo: this._user).snapshots(),
         builder: (context, snapshot){
           if(!snapshot.hasData) return const Text('Loading...');
-          return ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (context, index) => getRow(snapshot.data.documents[index], width),
-          );
+          return new DataTable(
+            columnSpacing: 15,
+            columns: [
+              DataColumn(
+                label: const Text("Date"),
+              ),
+              DataColumn(
+                label: const Text("Start time"),
+              ),
+              DataColumn(
+                label: const Text("End time"),
+              ),
+              DataColumn(
+                label: const Text("Work time"),
+              ),
+              DataColumn(
+                label: const Text("Rate"),
+              ),
+            ],
+            rows: _createRows(snapshot.data));
         });
   }
 
-  Widget getRow(document, width){
-    if(this._user != document['user']){
-      return Text("");
-    }
-    return Container(
-      child:Row(
-        children: [
-          Center(child: Text(document['date'].toString())),
-          Container(width: width),
-          Center(child: Text(document['strHour'].toString())),
-          Container(width: width),
-          Center(child: Text(document['endHour'].toString())),
-          Container(width: width),
-          Center(child: Text(document['rate'].toString())),
-          Container(width: width),
-          Center(child: Text(document['workHours'].toString())),
-        ],
-      ),
-      padding: new EdgeInsets.only(left: 30, right: 30),
-    );
+  List<DataRow> _createRows(QuerySnapshot snapshot) {
+      List<DataRow> newList = snapshot.documents.map((DocumentSnapshot documentSnapshot) {
+      return new DataRow(
+          cells: [
+            DataCell(Text(documentSnapshot['date'].toString())),
+            DataCell(Text(documentSnapshot['strHour'].toString())),
+            DataCell(Text(documentSnapshot['endHour'].toString())),
+            DataCell(Text(documentSnapshot['workHours'].toString())),
+            DataCell(Text(documentSnapshot['rate'].toString())),
+          ]
+      );
+    }).toList();
+    return newList;
   }
 }
