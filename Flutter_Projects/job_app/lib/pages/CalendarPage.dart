@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:job_app/pageElements/MenuDrawer.dart';
-//import 'package:job_app/items/CalendarWidget.dart';
 import 'package:ant_icons/ant_icons.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/items/StyleSettings.dart';
-//import 'package:job_app/pages/SignInSignUpPage.dart';
-import 'package:job_app/items/DatabaseManagement.dart';
+import 'package:job_app/items/Authorization.dart';
+import 'package:job_app/pageElements/WorkDataTable.dart';
 
 class CalendarPage  extends StatefulWidget{
   @override
@@ -40,7 +38,7 @@ class _WidgetState extends State<CalendarPage>{
                         onPressed: _signOut)
                   ],
                 ),
-                body: _getData(),
+                body: WorkDataTable(),
                 key: scaffoldKey,
                 floatingActionButton: FloatingActionButton(
                   backgroundColor: styleColor,
@@ -48,7 +46,6 @@ class _WidgetState extends State<CalendarPage>{
                       child:Icon(AntIcons.form)
                   ),
                   onPressed: () {
-                    _db.getData(this._user);
                     scaffoldKey.currentState
                         .showBottomSheet((context) => _getBottomSheet());
                   }
@@ -62,19 +59,6 @@ class _WidgetState extends State<CalendarPage>{
   void initState(){
     super.initState();
     _db.getUser().then((currUser) {this._user = currUser.uid;});
-  }
-
-  Widget _getData(){
-    return StreamBuilder(
-        stream: Firestore.instance.collection('hoursDB').snapshots(),
-        builder: (context, snapshot){
-          if(!snapshot.hasData) return const Text('Loading...');
-          return ListView.builder(
-            itemCount: snapshot.data.documents.length,
-            itemBuilder: (context, index) =>
-                _buildListItem(context, snapshot.data.documents[index]),
-          );
-        });
   }
 
    void _signOut() async {
@@ -130,47 +114,6 @@ class _WidgetState extends State<CalendarPage>{
             ),
           ],
         )
-    );
-  }
-
-  Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-    if(_user != document['user']) return ListTile(
-      title: Row(
-          children: <Widget>[
-            Text(""),
-          ]
-      )
-    );
-    return ListTile(
-      title: Row(
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              document['date'].toString(),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              document['strHour'].toString(),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              document['endHour'].toString(),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              document['rate'].toString(),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              document['workHours'].toString(),
-            ),
-          ),
-        ],
-      ),
     );
   }
 
