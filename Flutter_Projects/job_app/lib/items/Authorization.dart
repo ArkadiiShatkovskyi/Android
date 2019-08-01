@@ -1,11 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:job_app/pages/SignInSignUpPage.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'WorkDay.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'WorkDay.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
-final Firestore _db = Firestore.instance;
 
 class DBConnect{
 
@@ -69,18 +68,25 @@ class DBConnect{
     this._isLoading = true;
   }
 
-  Future<List> getData(user) async{
-    print("user: " + user);
-    List test = new List();
-    _db.collection('hoursDB')
-        .where('user', isEqualTo: user)
-        .snapshots()
-        .listen((data) =>
-        data.documents.forEach((doc){
-          print("us: " + doc['user'].toString());
-          test.add(new WorkDay(doc['strHour'].toDouble(), doc['endHour'].toDouble(), doc['workHours'].toDouble(), doc['date'], doc['rate'].toDouble()));
-        }));
-    print("list: " + test.toString());
-    return test;
-  }
+  /*Future<List<WorkDay>> getData(user) async{
+    List<WorkDay> tempList = new List();
+    List<DocumentSnapshot> test;
+    try{
+      Firestore _db = Firestore.instance;
+      _db.collection('hoursDB')
+          .where('user', isEqualTo: user)
+          .snapshots()
+          .listen((data) =>
+          data.documents.forEach((doc){
+            print("us: " + doc['user'].toString());
+            t.add(doc['date']);
+            tempList.add(new WorkDay(doc['strHour'].toDouble(), doc['endHour'].toDouble(), doc['workHours'].toDouble(), doc['date'], doc['rate'].toDouble()));
+          }));
+    }catch(e){
+      print(e);
+    }finally{
+      // ignore: control_flow_in_finally
+      return tempList;
+    }
+  }*/
 }
