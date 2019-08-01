@@ -5,7 +5,7 @@ import 'package:job_app/items/StyleSettings.dart';
 import 'package:ant_icons/ant_icons.dart';
 //import 'package:job_app/services/authentication.dart';
 import 'package:job_app/pages/CalendarPage.dart';
-import 'package:job_app/items/DatabaseManagement.dart';
+import 'package:job_app/items/Authorization.dart';
 
 
 class SignInSignUp extends StatefulWidget{
@@ -50,16 +50,15 @@ class _LogInSignUpState extends State<SignInSignUp>{
           )
       );
 
-
   @override
   void initState(){
     super.initState();
     _formMode = FormMode.LOGIN;
-    _db.getUser().then((user){
-      if(user != null){
-        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
-      }
-    });
+//    _db.getUser().then((user){
+//      if(user != null){
+//        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
+//      }
+//    });
   }
 
   Widget _showCircularProgress(){
