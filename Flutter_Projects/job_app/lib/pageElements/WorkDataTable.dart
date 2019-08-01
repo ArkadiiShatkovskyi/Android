@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:job_app/items/WorkDay.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/items/Authorization.dart';
 
@@ -11,15 +10,13 @@ class WorkDataTable extends StatefulWidget{
 }
 
 class _WorkDataTableState extends State<WorkDataTable>{
-  List<WorkDay> _records;
-  String _user;
 
+  String _user;
   DBConnect _db = new DBConnect();
 
   @override
   void initState(){
     super.initState();
-    _records = new List();
     _db.getUser().then((currUser) {this._user = currUser.uid;});
   }
 
@@ -63,6 +60,9 @@ class _WorkDataTableState extends State<WorkDataTable>{
   }
 
   Widget getRow(document, width){
+    if(this._user != document['user']){
+      return Text("");
+    }
     return Container(
       child:Row(
         children: [
