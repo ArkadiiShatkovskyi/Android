@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:job_app/pages/SignInSignUpPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'WorkDay.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
+final Firestore _db = Firestore.instance;
 
 class DBConnect{
 
@@ -58,11 +61,26 @@ class DBConnect{
     return await _auth.currentUser();
   }
 
-  bool isLoading(){
+  bool setToLoad(){
     return _isLoading;
   }
 
-  bool setIsLoading(){
+  void setIsLoading(){
     this._isLoading = true;
+  }
+
+  Future<List> getData(user) async{
+    print("user: " + user);
+    List test = new List();
+    _db.collection('hoursDB')
+        .where('user', isEqualTo: user)
+        .snapshots()
+        .listen((data) =>
+        data.documents.forEach((doc){
+          print("us: " + doc['user'].toString());
+          test.add(new WorkDay(doc['strHour'].toDouble(), doc['endHour'].toDouble(), doc['workHours'].toDouble(), doc['date'], doc['rate'].toDouble()));
+        }));
+    print("list: " + test.toString());
+    return test;
   }
 }

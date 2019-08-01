@@ -17,16 +17,13 @@ class _WidgetState extends State<CalendarPage>{
   final String bcgImage = "assets/images/bckg3.jpg";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
-//  bool _isLoading = false;
-  String user;
+  String _user;
   DBConnect _db = new DBConnect();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-          //buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.accent),
-          //dialogTheme: DialogTheme(titleTextStyle: DialogTheme.),
           accentColor: styleColor,
           primaryColor: styleColor),
       debugShowCheckedModeBanner: false,
@@ -35,7 +32,7 @@ class _WidgetState extends State<CalendarPage>{
         child:Scaffold(
                 drawer: MenuDrawer(2),
                 appBar: AppBar(
-                  title: Text("Calendar"),
+                  title: Text("Your work"),
                   backgroundColor: styleColor,
                   actions: <Widget>[
                     new FlatButton(
@@ -44,19 +41,6 @@ class _WidgetState extends State<CalendarPage>{
                   ],
                 ),
                 body: _getData(),
-//                ListView(children: <Widget>[
-                  /*Container(
-                    foregroundDecoration: BoxDecoration(color: Colors.transparent),
-                    width: 300,
-                    height: 300,
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: Image(
-                      image: AssetImage("assets/images/undraw_calendar_dutt.png"),
-                    ),
-                  ),*/
-//                  Center(child:Text(' CALENDAR PAGE ')),
-//                ],
-//                ),
                 key: scaffoldKey,
                 floatingActionButton: FloatingActionButton(
                   backgroundColor: styleColor,
@@ -64,6 +48,7 @@ class _WidgetState extends State<CalendarPage>{
                       child:Icon(AntIcons.form)
                   ),
                   onPressed: () {
+                    _db.getData(this._user);
                     scaffoldKey.currentState
                         .showBottomSheet((context) => _getBottomSheet());
                   }
@@ -76,7 +61,7 @@ class _WidgetState extends State<CalendarPage>{
   @override
   void initState(){
     super.initState();
-    _db.getUser().then((currUser) {this.user = currUser.uid;});
+    _db.getUser().then((currUser) {this._user = currUser.uid;});
   }
 
   Widget _getData(){
@@ -149,7 +134,7 @@ class _WidgetState extends State<CalendarPage>{
   }
 
   Widget _buildListItem(BuildContext context, DocumentSnapshot document) {
-    if(user != document['user']) return ListTile(
+    if(_user != document['user']) return ListTile(
       title: Row(
           children: <Widget>[
             Text(""),
@@ -188,13 +173,6 @@ class _WidgetState extends State<CalendarPage>{
       ),
     );
   }
-
-  /*Widget _showCircularProgress(){
-    if (_isLoading) {
-      return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(styleColor)));
-    } return Container(height: 0.0, width: 0.0,);
-
-  }*/
 
   Future<Null> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(

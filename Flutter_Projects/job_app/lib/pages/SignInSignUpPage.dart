@@ -89,7 +89,7 @@ class _LogInSignUpState extends State<SignInSignUp>{
   void signInWithEmail() async{
     _db.setIsLoading();
     setState(() {
-      _isLoading = _db.isLoading();
+      _isLoading = _db.setToLoad();
     });
     _db.signInWithEmail(_emailTextController.text, _passwordTextController.text, navigatorKey).then((answer){
       if(answer == true){
@@ -97,12 +97,12 @@ class _LogInSignUpState extends State<SignInSignUp>{
       }else{
         //show message try again
         setState(() {
-          _isLoading = _db.isLoading();
+          _isLoading = _db.setToLoad();
         });
       }
     });
     setState(() {
-      _isLoading = _db.isLoading();
+      _isLoading = _db.setToLoad();
     });
   }
 
