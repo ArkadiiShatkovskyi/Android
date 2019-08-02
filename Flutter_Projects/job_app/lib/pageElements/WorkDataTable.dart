@@ -11,18 +11,25 @@ class WorkDataTable extends StatefulWidget{
 class _WorkDataTableState extends State<WorkDataTable>{
 
   String _user;
-  DBConnect _db = new DBConnect();
+  Authorization _db = new Authorization();
 
   @override
-        void initState(){
-      super.initState();
-      _db.getUser().then((currUser) {this._user = currUser.uid;});
-    }
+  void initState(){
+    super.initState();
+    _getUser();
+  }
+
+  void _getUser() async{
+    var firebaseUser =  await _db.getUser();
+    setState(() {
+      _user = firebaseUser.uid;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: Firestore.instance.collection('hoursDB').where('user', isEqualTo: this._user).snapshots(),
+        stream: Firestore.instance.collection('hoursDB').where("user", isEqualTo: _user).snapshots(),
         builder: (context, snapshot){
           if(!snapshot.hasData) return const Text('Loading...');
           return new DataTable(
