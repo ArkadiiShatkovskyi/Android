@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:job_app/pages/SignInSignUpPage.dart';
-//import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'WorkDay.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-class DBConnect{
+class Authorization{
 
   String user;
   bool _isLoading = false;
