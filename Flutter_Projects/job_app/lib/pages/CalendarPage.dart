@@ -16,7 +16,7 @@ class _WidgetState extends State<CalendarPage>{
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   DateTime selectedDate = DateTime.now();
   String _user;
-  DBConnect _db = new DBConnect();
+  Authorization _db = new Authorization();
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +100,7 @@ class _WidgetState extends State<CalendarPage>{
                     padding: EdgeInsets.only(left: 50.0, right: 50.0, top: 20.0, bottom: 20.0),
                     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                     onPressed: () => _selectDate(context),
-                    child: const Text('Start time'),
+                    child: const Icon(AntIcons.alibaba),
                   ),
                   Spacer(flex: 2),
                   new RaisedButton(
