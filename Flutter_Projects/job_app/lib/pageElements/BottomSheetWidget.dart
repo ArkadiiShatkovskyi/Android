@@ -12,7 +12,7 @@ class _BottomSheetState extends State<BottomSheetWidget>{
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 400,
+        height: 460,
 //        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
@@ -22,67 +22,6 @@ class _BottomSheetState extends State<BottomSheetWidget>{
         child: _createBody(),
     );
   }
-
-/*  Widget _createBody(){
-    return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        Center(child:Text("Add your work", style: TextStyle(fontSize: 18),)),
-        Container(
-          width: 150,
-          padding: EdgeInsets.only(left: 75, right: 75),
-          child: Row(
-            children: <Widget>[
-              Text("Choose start time", style: TextStyle(fontSize: 16),),
-              IconButton(
-                padding: EdgeInsets.only(left: 30),
-                icon: Icon(AntIcons.calendar_outline),
-                iconSize: 40,
-                color: styleColor,
-                onPressed: (){},
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: 150,
-          padding: EdgeInsets.only(left: 75, right: 75),
-          child: Row(
-            children: <Widget>[
-              Text("Choose end time", style: TextStyle(fontSize: 16),),
-              IconButton(
-                padding: EdgeInsets.only(left: 36),
-                icon: Icon(AntIcons.calendar_outline),
-                iconSize: 40,
-                color: styleColor,
-                onPressed: (){},
-              ),
-            ],
-          ),
-        ),
-        Container(
-          width: 150,
-          padding: EdgeInsets.only(left: 75, right: 75),
-          child: Row(
-            children: <Widget>[
-              Text("Write your rate", style: TextStyle(fontSize: 16),),
-              Container(
-                width: 100,
-                padding: EdgeInsets.only(left: 30),
-                child:TextField(
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
-                    labelText: 'Rate',
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }*/
 
   Widget _createBody(){
     return GridView.count(
@@ -135,6 +74,17 @@ class _BottomSheetState extends State<BottomSheetWidget>{
           ),
         )
         ),
+        const Text(""),
+        const Text(""),
+        const Text(""),
+        IconButton(
+          icon: Icon(AntIcons.save),
+          iconSize: 40,
+          color: styleColor,
+          onPressed: (){},
+        ),
+        const Text(""),
+        const Text(""),
       ],
     );
   }
