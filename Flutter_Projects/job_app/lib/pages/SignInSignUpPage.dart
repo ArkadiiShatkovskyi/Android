@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:job_app/items/StyleSettings.dart';
 import 'package:ant_icons/ant_icons.dart';
-//import 'package:job_app/services/authentication.dart';
 import 'package:job_app/pages/CalendarPage.dart';
 import 'package:job_app/items/Authorization.dart';
 
@@ -18,7 +17,7 @@ enum FormMode { LOGIN, SIGNUP }
 class _LogInSignUpState extends State<SignInSignUp>{
 
   FormMode _formMode;
-  DBConnect _db = new DBConnect();
+  Authorization _db = new Authorization();
 
   String _pageText = "Sign In";
   String _secondButtonText = "Create an account";
@@ -54,11 +53,11 @@ class _LogInSignUpState extends State<SignInSignUp>{
   void initState(){
     super.initState();
     _formMode = FormMode.LOGIN;
-//    _db.getUser().then((user){
-//      if(user != null){
-//        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
-//      }
-//    });
+    _db.getUser().then((user){
+      if(user != null){
+        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
+      }
+    });
   }
 
   Widget _showCircularProgress(){
