@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:job_app/pageElements/MenuDrawer.dart';
 import 'package:ant_icons/ant_icons.dart';
+import 'package:job_app/pageElements/MenuDrawer.dart';
 import 'package:job_app/items/StyleSettings.dart';
 import 'package:job_app/items/Authorization.dart';
 import 'package:job_app/pageElements/WorkDataTable.dart';
@@ -14,7 +14,6 @@ class CalendarPage  extends StatefulWidget{
 class _WidgetState extends State<CalendarPage>{
   final String bcgImage = "assets/images/bckg3.jpg";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  DateTime selectedDate = DateTime.now();
   String _user;
   Authorization _db = new Authorization();
 
@@ -63,18 +62,5 @@ class _WidgetState extends State<CalendarPage>{
 
    void _signOut() async {
     _db.signOut(context);
-  }
-
-  Future<Null> _selectDate(BuildContext context) async {
-    final DateTime picked = await showDatePicker(
-        initialDatePickerMode: DatePickerMode.day,
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2050));
-    if (picked != null && picked != selectedDate)
-      setState(() {
-        selectedDate = picked;
-      });
   }
 }
