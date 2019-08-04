@@ -46,7 +46,7 @@ class _WidgetState extends State<CalendarPage>{
                   ),
                   onPressed: () {
                     scaffoldKey.currentState
-                        .showBottomSheet((context) => BottomSheetWidget());
+                        .showBottomSheet((context) => BottomSheetWidget(_user));
                   }
                 ),
               ),
