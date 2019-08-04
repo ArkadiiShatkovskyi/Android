@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ant_icons/ant_icons.dart';
 import 'package:job_app/items/StyleSettings.dart';
-import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BottomSheetWidget extends StatefulWidget{
+  String _user;
+
+  BottomSheetWidget(this._user);
+
   @override
-  State<StatefulWidget> createState() => _BottomSheetState();
+  State<StatefulWidget> createState() => _BottomSheetState(_user);
 }
 
 class _BottomSheetState extends State<BottomSheetWidget>{
@@ -13,13 +17,17 @@ class _BottomSheetState extends State<BottomSheetWidget>{
   TimeOfDay _strTime = TimeOfDay.now();
   TimeOfDay _endTime = TimeOfDay.now();
   DateTime _date =  DateTime.now();
+  TextEditingController _rateController = TextEditingController();
   String _rate;
   String _workTime;
+  String _user;
+
+  _BottomSheetState(this._user);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 460,
+        height: 500,
 //        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
         margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
@@ -79,7 +87,8 @@ class _BottomSheetState extends State<BottomSheetWidget>{
         const Text(""),
         Center(child:Text("Write your rate", style: TextStyle(fontSize: 16))),
         const Text(""),
-        Center(child:TextField(
+        Center(child: TextField(
+          controller: _rateController,
           obscureText: false,
           decoration: InputDecoration(
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
@@ -94,10 +103,17 @@ class _BottomSheetState extends State<BottomSheetWidget>{
           icon: Icon(AntIcons.save),
           iconSize: 40,
           color: styleColor,
-          onPressed: (){},
+          onPressed: (){
+            _addHours();
+          },
         ),
         const Text(""),
         const Text(""),
+        Text(_date.toString().substring(5, 10)),
+        Text(_strTime.toString().substring(10, 15)),
+        Text(_endTime.toString().substring(10, 15)),
+        Text("hoursH"),
+        Text(_rateController.text),
       ],
     );
   }
@@ -138,5 +154,17 @@ class _BottomSheetState extends State<BottomSheetWidget>{
         _endTime = picked;
 //        print("end time: " + _endTime.toString().substring(10, 15));
       });
+  }
+
+  void _addHours() async{
+    await Firestore.instance.collection('hoursDB')
+        .add(
+        {
+          'user': _user,
+          'date': _date.toString().substring(5, 10),
+          'strHour': _strTime.toString().substring(10, 15),
+          'endHour': _endTime.toString().substring(10, 15),
+          'rate': _rateController.text,
+    });
   }
 }
