@@ -18,8 +18,6 @@ class _BottomSheetState extends State<BottomSheetWidget>{
   TimeOfDay _endTime = TimeOfDay.now();
   DateTime _date =  DateTime.now();
   TextEditingController _rateController = TextEditingController();
-  String _rate;
-  String _workTime;
   String _user;
 
   _BottomSheetState(this._user);
@@ -157,6 +155,9 @@ class _BottomSheetState extends State<BottomSheetWidget>{
   }
 
   void _addHours() async{
+    double strTime = _strTime.hour + _strTime.minute/60.0;
+    double endTime = _endTime.hour + _endTime.minute/60.0;
+    double workTime = endTime - strTime;
     await Firestore.instance.collection('hoursDB')
         .add(
         {
@@ -164,6 +165,7 @@ class _BottomSheetState extends State<BottomSheetWidget>{
           'date': _date.toString().substring(5, 10),
           'strHour': _strTime.toString().substring(10, 15),
           'endHour': _endTime.toString().substring(10, 15),
+          'workHours': workTime,
           'rate': _rateController.text,
     });
   }
