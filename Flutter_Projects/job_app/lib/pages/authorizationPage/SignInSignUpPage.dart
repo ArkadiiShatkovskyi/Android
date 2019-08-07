@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:job_app/items/StyleSettings.dart';
 import 'package:ant_icons/ant_icons.dart';
-import 'package:job_app/pages/mainPage/WorkTimePage.dart';
-import 'package:job_app/items/Authorization.dart';
+import 'package:job_app/pages/mainPage/MainPage.dart';
+import 'package:job_app/pages/authorizationPage/Authorization.dart';
 
 
 class SignInSignUp extends StatefulWidget{
@@ -55,7 +55,7 @@ class _LogInSignUpState extends State<SignInSignUp>{
     _formMode = FormMode.LOGIN;
     _db.getUser().then((user){
       if(user != null){
-        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
+        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => MainPage()));
       }
     });
   }
@@ -91,7 +91,7 @@ class _LogInSignUpState extends State<SignInSignUp>{
     });
     _db.signInWithEmail(_emailTextController.text, _passwordTextController.text, navigatorKey).then((answer){
       if(answer == true){
-        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => CalendarPage()));
+        navigatorKey.currentState.push(MaterialPageRoute(builder: (context) => MainPage()));
       }else{
         //show message try again
         setState(() {
