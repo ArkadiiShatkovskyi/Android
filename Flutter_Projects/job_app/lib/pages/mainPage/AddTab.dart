@@ -30,32 +30,6 @@ class _AddTabState extends State<AddTab>{
   }
 
   Widget _createBody(){
-    /*return ListView(
-      physics: const NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        Container(
-          padding: EdgeInsets.only(left: 160, right: 160),
-          child:  Row(children: <Widget>[
-            const Text("Add work", style: TextStyle(fontSize: 18)),
-          ],),
-        ),
-        Container(
-          child: Row(
-            children: <Widget>[
-              const Text("Choose start time", style: TextStyle(fontSize: 16)),
-              IconButton(
-                icon: Icon(AntIcons.clock_circle_outline),
-                iconSize: 40,
-                color: styleColor,
-                onPressed: (){
-                  _showStartTimePicker(context);
-                },
-              ),
-            ],
-          ),
-        ),
-      ],
-    );*/
     return GridView.count(
       physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 5,
@@ -146,7 +120,6 @@ class _AddTabState extends State<AddTab>{
     if (picked != null && picked != _date)
       setState(() {
         _date = picked;
-//        print("date: " + _date.toString().substring(5, 10));
       });
   }
 
@@ -158,7 +131,6 @@ class _AddTabState extends State<AddTab>{
     if (picked != null && picked != _strTime)
       setState(() {
         _strTime = picked;
-//        print("str time: " + _strTime.toString().substring(10, 15));
       });
   }
 
@@ -170,7 +142,6 @@ class _AddTabState extends State<AddTab>{
     if (picked != null && picked != _endTime)
       setState(() {
         _endTime = picked;
-//        print("end time: " + _endTime.toString().substring(10, 15));
       });
   }
 
@@ -183,7 +154,7 @@ class _AddTabState extends State<AddTab>{
           'strTime': _strTime.toString().substring(10, 15),
           'endTime': _endTime.toString().substring(10, 15),
           'workTime': workTime,
-          'rate': _rateController.text,
+          'rate': double.parse(_rateController.text),
         });
   }
 }
