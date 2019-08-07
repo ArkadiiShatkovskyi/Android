@@ -5,3 +5,4 @@ Color _hexToColor(String code) {
 }
 
 final Color styleColor = _hexToColor("#7d93fe");
+double defaultRate = 15;
