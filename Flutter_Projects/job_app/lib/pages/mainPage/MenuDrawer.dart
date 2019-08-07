@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:job_app/pageElements/DrawerCard.dart';
+import 'package:job_app/pages/mainPage/DrawerCard.dart';
 import 'package:job_app/items/StyleSettings.dart';
 import 'package:ant_icons/ant_icons.dart';
 
@@ -47,7 +47,6 @@ class MenuDrawer extends StatelessWidget{
             _drawerStyle(),
             Divider(height: 10, color: Colors.transparent),
             DrawerCard("Account", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.user),        //not added
-            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.table),     //not added
             DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.setting_outline),             //not added
             DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.info_circle_outline),
             DrawerCard("Close", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.close_square_outline),           //modify
@@ -61,7 +60,6 @@ class MenuDrawer extends StatelessWidget{
             _drawerStyle(),
             DrawerCard("Account", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.user),        //not added
             DrawerCard("Calendar", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.calendar_outline),
-            DrawerCard("Summary", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.table),     //not added
             DrawerCard("Settings", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.setting_outline),             //not added
             DrawerCard("About", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.info_circle_outline),
             DrawerCard("Close", iconsColor, drawerFont, iconsSize, tilesFontSize, AntIcons.close_square_outline),           //modify
