@@ -32,10 +32,12 @@ class _SummaryTabState extends State<SummaryTab>{
           return tot + doc.data['workTime'];
       });
       double tempSalary = snapshot.documents.fold(0, (tot, doc) => tot + doc.data['workTime'] * doc.data['rate']);
-      setState(() {
-        _workedTime = tempWorkTime;
-        _salary = tempSalary;
-      });
+      if (this.mounted){
+        setState(() {
+          _workedTime = tempWorkTime;
+          _salary = tempSalary;
+        });
+      }
     });
   }
 
@@ -47,16 +49,16 @@ class _SummaryTabState extends State<SummaryTab>{
           physics: const NeverScrollableScrollPhysics(),
           children: <Widget>[
             Divider(height: 25, color: Colors.transparent,),
-            const Center(child:Text("Summary", style: TextStyle(fontSize: 20),)),
+            const Center(child:Text("Summary", style: TextStyle(fontSize: 22),)),
             Divider(height: 25,),
             Container(
                 child: Row(
                   children: <Widget>[
                     Container(
-                        child: const Text("Time worked: ", style: TextStyle(fontSize: 16),),
-                        width: 200,
+                        child: const Text("Time worked: ", style: TextStyle(fontSize: 18),),
+                        width: 150,
                     ),
-                    Text(_workedTime.toString(), style: TextStyle(fontSize: 16),)
+                    Text(_workedTime.toString(), style: TextStyle(fontSize: 18),)
                   ],
             )
             ),
@@ -64,10 +66,10 @@ class _SummaryTabState extends State<SummaryTab>{
                 child: Row(
                   children: <Widget>[
                     Container(
-                      child: const Text("Salary: ", style: TextStyle(fontSize: 16),),
-                      width: 200,
+                      child: const Text("Salary: ", style: TextStyle(fontSize: 18),),
+                      width: 150,
                     ),
-                    Text(_salary.toString(), style: TextStyle(fontSize: 16),)
+                    Text(_salary.toString(), style: TextStyle(fontSize: 18),)
               ],
             )
             ),
