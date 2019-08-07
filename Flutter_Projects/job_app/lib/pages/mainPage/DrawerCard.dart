@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:job_app/pages/InfoPage.dart';
-import 'package:job_app/pages/SignInSignUpPage.dart';
 
 class DrawerCard extends StatelessWidget{
   final String drawerFont;
