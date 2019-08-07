@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:job_app/pages/CalendarPage.dart';
+import 'package:job_app/pages/mainPage/MainPage.dart';
 import 'package:job_app/items/StyleSettings.dart';
 
 class InfoWidget extends StatelessWidget{
@@ -16,7 +16,7 @@ class InfoWidget extends StatelessWidget{
                 title: Text("About"),
                 backgroundColor: styleColor,
                 leading: IconButton(icon:Icon(Icons.arrow_back),
-                  onPressed:() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CalendarPage())),
+                  onPressed:() => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MainPage())),
                 )
             ),
             body: Container(
