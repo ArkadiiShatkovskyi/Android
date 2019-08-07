@@ -21,6 +21,7 @@ class _AddTabState extends State<AddTab>{
     super.initState();
     Authorization _db = new Authorization();
     _db.getUser().then((currUser) {this._user = currUser.uid;});
+    _rateController.text = defaultRate.toString();
   }
 
   @override
@@ -61,14 +62,15 @@ class _AddTabState extends State<AddTab>{
       children: <Widget>[
         const Text(""),
         const Text(""),
-        const Text("Add work", style: TextStyle(fontSize: 18)),
+        const Center(child:Text("Add work", style: TextStyle(fontSize: 18))),
         const Text(""),
         const Text(""),
+
         const Text(""),
         Center(child:Text("Choose start time", style: TextStyle(fontSize: 16))),
-        const Text(""),
+        Center(child:Text(_strTime.toString().substring(10, 15))),
         IconButton(
-          icon: Icon(AntIcons.clock_circle_outline),
+          icon: Icon(AntIcons.clock_circle_outline, semanticLabel: "test",),
           iconSize: 40,
           color: styleColor,
           onPressed: (){
@@ -76,9 +78,10 @@ class _AddTabState extends State<AddTab>{
           },
         ),
         const Text(""),
+
         const Text(""),
         const Center(child:Text("Choose end time", style: TextStyle(fontSize: 16))),
-        const Text(""),
+        Center(child:Text(_endTime.toString().substring(10, 15))),
         IconButton(
           icon: Icon(AntIcons.clock_circle_outline),
           iconSize: 40,
@@ -88,9 +91,10 @@ class _AddTabState extends State<AddTab>{
           },
         ),
         const Text(""),
+
         const Text(""),
         const Center(child:Text("Choose date", style: TextStyle(fontSize: 16))),
-        const Text(""),
+        Center(child:Text(_date.toString().substring(5, 10))),
         IconButton(
           icon: Icon(AntIcons.calendar_outline),
           iconSize: 40,
@@ -100,6 +104,7 @@ class _AddTabState extends State<AddTab>{
           },
         ),
         const Text(""),
+
         const Text(""),
         Center(child:Text("Write your rate", style: TextStyle(fontSize: 16))),
         const Text(""),
@@ -113,6 +118,8 @@ class _AddTabState extends State<AddTab>{
         )
         ),
         const Text(""),
+
+
         const Text(""),
         const Text(""),
         IconButton(
@@ -125,11 +132,6 @@ class _AddTabState extends State<AddTab>{
         ),
         const Text(""),
         const Text(""),
-        /*Text(_date.toString().substring(5, 10)),
-        Text(_strTime.toString().substring(10, 15)),
-        Text(_endTime.toString().substring(10, 15)),
-        Text("hoursH"),
-        Text(_rateController.text),*/
       ],
     );
   }
@@ -174,14 +176,13 @@ class _AddTabState extends State<AddTab>{
 
   void _addHours() async{
     double workTime = (_endTime.hour + _endTime.minute/60.0) - (_strTime.hour + _strTime.minute/60.0);
-    await Firestore.instance.collection('hoursDB')
+    await Firestore.instance.collection(_user)
         .add(
         {
-          'user': _user,
           'date': _date.toString().substring(5, 10),
-          'strHour': _strTime.toString().substring(10, 15),
-          'endHour': _endTime.toString().substring(10, 15),
-          'workHours': workTime,
+          'strTime': _strTime.toString().substring(10, 15),
+          'endTime': _endTime.toString().substring(10, 15),
+          'workTime': workTime,
           'rate': _rateController.text,
         });
   }
