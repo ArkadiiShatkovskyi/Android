@@ -40,12 +40,6 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   fonts:
-    - family: DancingScript
-      fonts:
-        - asset: assets/fonts/dancing_script.ttf
-    - family: EBG-RegularItalic
-      fonts:
-        - asset: assets/fonts/EBGaramond-RegularItalic.ttf
     - family: CourgetteRegular
       fonts:
         - asset: assets/fonts/courgette-regular.ttf
