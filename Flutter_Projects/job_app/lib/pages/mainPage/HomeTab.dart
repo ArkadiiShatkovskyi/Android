@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/pages/authorizationPage/Authorization.dart';
 
-class WorkDataTable extends StatefulWidget{
+class HomeTab extends StatefulWidget{
 
   @override
-  State<StatefulWidget> createState() => _WorkDataTableState();
+  State<StatefulWidget> createState() => _HomeTabState();
 }
 
-class _WorkDataTableState extends State<WorkDataTable>{
+class _HomeTabState extends State<HomeTab>{
 
   String _user;
   Authorization _db = new Authorization();
