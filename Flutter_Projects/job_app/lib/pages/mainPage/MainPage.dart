@@ -15,10 +15,9 @@ class MainPage extends StatefulWidget{
 class _MainPageState extends State<MainPage>{
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  String _user;
   Authorization _db = new Authorization();
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static List<Widget> _widgetOptions = <Widget>[
+  List<Widget> _widgetOptions = <Widget>[
     HomeTab(),        //DATA TABLE TAB
     SummaryTab(),     //SUMMARY TAB
     AddTab(),         //ADD TAB
@@ -70,10 +69,7 @@ class _MainPageState extends State<MainPage>{
               child: Center(
                   child:Icon(AntIcons.form)
               ),
-              onPressed: () {
-                /*scaffoldKey.currentState
-                    .showBottomSheet((context) => BottomSheetWidget(_user));*/
-              }
+              onPressed: () {}
           ),
         ),
       ),
@@ -89,7 +85,6 @@ class _MainPageState extends State<MainPage>{
   @override
   void initState(){
     super.initState();
-    _db.getUser().then((currUser) {this._user = currUser.uid;});
   }
 
   void _signOut() async {
