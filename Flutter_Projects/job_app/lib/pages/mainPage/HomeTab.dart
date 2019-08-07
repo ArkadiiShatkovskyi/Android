@@ -10,7 +10,7 @@ class HomeTab extends StatefulWidget{
 
 class _HomeTabState extends State<HomeTab>{
 
-  String _user;
+  String _user = "1";
   Authorization _db = new Authorization();
 
   @override
@@ -29,7 +29,7 @@ class _HomeTabState extends State<HomeTab>{
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: Firestore.instance.collection('hoursDB').where("user", isEqualTo: _user).snapshots(),
+        stream: Firestore.instance.collection(_user).snapshots(),
         builder: (context, snapshot){
           if(!snapshot.hasData) return const Text('Loading...');
           return new DataTable(
@@ -60,9 +60,9 @@ class _HomeTabState extends State<HomeTab>{
       return new DataRow(
           cells: [
             DataCell(Text(documentSnapshot['date'].toString())),
-            DataCell(Text(documentSnapshot['strHour'].toString())),
-            DataCell(Text(documentSnapshot['endHour'].toString())),
-            DataCell(Text(documentSnapshot['workHours'].toString())),
+            DataCell(Text(documentSnapshot['strTime'].toString())),
+            DataCell(Text(documentSnapshot['endTime'].toString())),
+            DataCell(Text(documentSnapshot['workTime'].toString())),
             DataCell(Text(documentSnapshot['rate'].toString())),
           ]
       );
