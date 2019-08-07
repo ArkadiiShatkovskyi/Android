@@ -5,6 +5,7 @@ import 'package:job_app/pages/authorizationPage/Authorization.dart';
 import 'package:job_app/pages/mainPage/HomeTab.dart';
 import 'package:job_app/pages/mainPage/MenuDrawer.dart';
 import 'package:job_app/pages/mainPage/AddTab.dart';
+import 'package:job_app/pages/mainPage/SummaryTab.dart';
 
 class MainPage extends StatefulWidget{
   @override
@@ -19,9 +20,7 @@ class _MainPageState extends State<MainPage>{
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomeTab(),        //DATA TABLE TAB
-    Text(
-      'Summary tab',
-    ),
+    SummaryTab(),     //SUMMARY TAB
     AddTab(),         //ADD TAB
   ];
 
