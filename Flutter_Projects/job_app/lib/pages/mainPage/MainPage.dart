@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:job_app/items/StyleSettings.dart';
 import "package:ant_icons/ant_icons.dart";
 import 'package:job_app/pages/authorizationPage/Authorization.dart';
-import 'package:job_app/pages/mainPage/WorkDataTable.dart';
+import 'package:job_app/pages/mainPage/HomeTab.dart';
 import 'package:job_app/pages/mainPage/MenuDrawer.dart';
-import 'package:job_app/pages/mainPage/BottomSheetWidget.dart';
+import 'package:job_app/pages/mainPage/AddTab.dart';
 
-class NavigationBar extends StatefulWidget{
+class MainPage extends StatefulWidget{
   @override
-  State<StatefulWidget> createState() => _NavigationBarState();
+  State<StatefulWidget> createState() => _MainPageState();
 }
 
-class _NavigationBarState extends State<NavigationBar>{
+class _MainPageState extends State<MainPage>{
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   String _user;
   Authorization _db = new Authorization();
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
-    WorkDataTable(),
+    HomeTab(),        //DATA TABLE TAB
     Text(
-      'Index 1: Add',
-      style: optionStyle,
+      'Summary tab',
     ),
+    AddTab(),         //ADD TAB
   ];
 
   @override
@@ -39,8 +39,12 @@ class _NavigationBarState extends State<NavigationBar>{
           bottomNavigationBar: BottomNavigationBar(
             items: const <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                icon: Icon(AntIcons.calendar_outline),
+                icon: Icon(AntIcons.database_outline),
                 title: Text('Home'),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.assessment),
+                title: Text('Summary'),
               ),
               BottomNavigationBarItem(
                 icon: Icon(AntIcons.file_add_outline),
@@ -68,8 +72,8 @@ class _NavigationBarState extends State<NavigationBar>{
                   child:Icon(AntIcons.form)
               ),
               onPressed: () {
-                scaffoldKey.currentState
-                    .showBottomSheet((context) => BottomSheetWidget(_user));
+                /*scaffoldKey.currentState
+                    .showBottomSheet((context) => BottomSheetWidget(_user));*/
               }
           ),
         ),
