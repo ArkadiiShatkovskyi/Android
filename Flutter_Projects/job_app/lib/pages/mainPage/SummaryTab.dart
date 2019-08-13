@@ -14,14 +14,15 @@ class _SummaryTabState extends State<SummaryTab>{
   double _salary = 0.0;
   double _salaryPerMonth = 0;
   double _workTimePerMonth = 0;
-  String _user;
+  List<dynamic> _listOfRates = new List();
+  List<dynamic> _listOfWorkTimePerRate = new List();
+  List<dynamic> _listOfSalaryPerRate = new List();
   Authorization _authorization = new Authorization();
 
   @override
   void initState(){
     super.initState();
     _authorization.getUser().then((currUser) {
-      this._user = currUser.uid;
       _getValues(currUser.uid);
     });
   }
@@ -31,17 +32,40 @@ class _SummaryTabState extends State<SummaryTab>{
         .collection(user)
         .snapshots()
         .listen((snapshot) {
-          double tempWorkTime = snapshot.documents.fold(0, (tot, doc) {
-          return tot + doc.data['workTime'];
-      });
-      double tempSalary = snapshot.documents.fold(0, (tot, doc) => tot + doc.data['workTime'] * doc.data['rate']);
-      if (this.mounted){
-        setState(() {
-          _workedTime = tempWorkTime;
-          _salary = tempSalary;
-        });
+            double tempWorkTime = snapshot.documents.fold(0, (tot, doc) {
+            return tot + doc.data['workTime'];
+            });
+            double tempSalary = snapshot.documents.fold(0, (tot, doc) => tot + doc.data['workTime'] * doc.data['rate']);
+            _createListOfRates(snapshot);
+            if (this.mounted){
+              setState(() {
+                _workedTime = tempWorkTime;
+                _salary = tempSalary;
+              });
       }
     });
+  }
+
+  List<dynamic> _getListOfRates(QuerySnapshot snapshot){
+    List<double> tempList = new List();
+    /*snapshot.documents.forEach((doc){
+        if(tempList.indexOf(doc['rate']) == -1)
+          tempList.add(doc['rate']);
+    });*/
+    return snapshot.documents.map((doc){
+      if(tempList.indexOf(doc['rate']) == -1){
+        tempList.add(doc['rate']);
+        return doc['rate'];
+      }
+    }).toList();
+  }
+
+  void _createListOfRates(QuerySnapshot snapshot){
+    List<dynamic> temp = _getListOfRates(snapshot);
+    temp.removeWhere((value){
+      return value == null;
+    });
+    _listOfRates = temp;
   }
 
   @override
