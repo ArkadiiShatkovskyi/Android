@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_app/pages/authorizationPage/Authorization.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/items/StyleSettings.dart';
+import 'package:job_app/services/Data.dart';
 
 class SummaryTab extends StatefulWidget{
 
@@ -36,10 +37,14 @@ class _SummaryTabState extends State<SummaryTab>{
             return tot + doc.data['workTime'];
             });
             double tempSalary = snapshot.documents.fold(0, (tot, doc) => tot + doc.data['workTime'] * doc.data['rate']);
-            _createListOfRates(snapshot);
+            _listOfRates = createListOfRates(snapshot);
+            _listOfSalaryPerRate = createListOfSalary(snapshot, _listOfRates);
+            _listOfWorkTimePerRate = createListOfWorkTime(snapshot, _listOfRates);
+            /** ---------------------------TEST VIEW---------------------------------------*/
             print(_listOfRates.toString());
-            _createListOfSalary(snapshot);
-            _createListOfWorkTime(snapshot);
+            print(_listOfWorkTimePerRate.toString());
+            print(_listOfSalaryPerRate.toString());
+            /** ---------------------------------------------------------------------------*/
             if (this.mounted){
               setState(() {
                 _workedTime = tempWorkTime;
@@ -47,60 +52,6 @@ class _SummaryTabState extends State<SummaryTab>{
               });
       }
     });
-  }
-
-  List<dynamic> _getListOfRates(QuerySnapshot snapshot){
-    List<double> tempList = new List();
-    return snapshot.documents.map((doc){
-      if(tempList.indexOf(doc['rate']) == -1){
-        tempList.add(doc['rate']);
-        return doc['rate'];
-      }
-    }).toList();
-  }
-
-  dynamic _getListOfSalary(QuerySnapshot snapshot, double rate){
-    return snapshot.documents.map((doc){
-      if(rate == doc['rate'])
-        return doc['rate'] * doc['workTime'];
-    }).toList();
-  }
-
-  dynamic _getListOfWorkTime(QuerySnapshot snapshot, double rate){
-    return snapshot.documents.map((doc){
-      if(rate == doc['rate'])
-        return doc['workTime'];
-    }).toList();
-  }
-
-  void _createListOfRates(QuerySnapshot snapshot){
-    List<dynamic> temp = _getListOfRates(snapshot);
-    temp.removeWhere((value){
-      return value == null;
-    });
-    _listOfRates = temp;
-  }
-
-  void _createListOfSalary(QuerySnapshot snapshot){
-    for(int i = 0; i < _listOfRates.length; i++){
-      List<dynamic> temp = _getListOfSalary(snapshot, _listOfRates[i]);
-      temp.removeWhere((value){
-        return value == null;
-      });
-      _listOfSalaryPerRate.add(temp.fold(0, (tot, doc) =>  tot + doc));
-    }
-    print(_listOfSalaryPerRate.toString());
-  }
-
-  void _createListOfWorkTime(QuerySnapshot snapshot){
-    for(int i = 0; i < _listOfRates.length; i++){
-      List<dynamic> temp = _getListOfWorkTime(snapshot, _listOfRates[i]);
-      temp.removeWhere((value){
-        return value == null;
-      });
-      _listOfWorkTimePerRate.add(temp.fold(0, (tot, doc) =>  tot + doc));
-    }
-    print(_listOfWorkTimePerRate.toString());
   }
 
   @override
