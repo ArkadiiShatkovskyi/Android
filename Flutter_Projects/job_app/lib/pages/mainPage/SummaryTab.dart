@@ -37,6 +37,9 @@ class _SummaryTabState extends State<SummaryTab>{
             });
             double tempSalary = snapshot.documents.fold(0, (tot, doc) => tot + doc.data['workTime'] * doc.data['rate']);
             _createListOfRates(snapshot);
+            print(_listOfRates.toString());
+            _createListOfSalary(snapshot);
+            _createListOfWorkTime(snapshot);
             if (this.mounted){
               setState(() {
                 _workedTime = tempWorkTime;
@@ -48,15 +51,25 @@ class _SummaryTabState extends State<SummaryTab>{
 
   List<dynamic> _getListOfRates(QuerySnapshot snapshot){
     List<double> tempList = new List();
-    /*snapshot.documents.forEach((doc){
-        if(tempList.indexOf(doc['rate']) == -1)
-          tempList.add(doc['rate']);
-    });*/
     return snapshot.documents.map((doc){
       if(tempList.indexOf(doc['rate']) == -1){
         tempList.add(doc['rate']);
         return doc['rate'];
       }
+    }).toList();
+  }
+
+  dynamic _getListOfSalary(QuerySnapshot snapshot, double rate){
+    return snapshot.documents.map((doc){
+      if(rate == doc['rate'])
+        return doc['rate'] * doc['workTime'];
+    }).toList();
+  }
+
+  dynamic _getListOfWorkTime(QuerySnapshot snapshot, double rate){
+    return snapshot.documents.map((doc){
+      if(rate == doc['rate'])
+        return doc['workTime'];
     }).toList();
   }
 
@@ -66,6 +79,28 @@ class _SummaryTabState extends State<SummaryTab>{
       return value == null;
     });
     _listOfRates = temp;
+  }
+
+  void _createListOfSalary(QuerySnapshot snapshot){
+    for(int i = 0; i < _listOfRates.length; i++){
+      List<dynamic> temp = _getListOfSalary(snapshot, _listOfRates[i]);
+      temp.removeWhere((value){
+        return value == null;
+      });
+      _listOfSalaryPerRate.add(temp.fold(0, (tot, doc) =>  tot + doc));
+    }
+    print(_listOfSalaryPerRate.toString());
+  }
+
+  void _createListOfWorkTime(QuerySnapshot snapshot){
+    for(int i = 0; i < _listOfRates.length; i++){
+      List<dynamic> temp = _getListOfWorkTime(snapshot, _listOfRates[i]);
+      temp.removeWhere((value){
+        return value == null;
+      });
+      _listOfWorkTimePerRate.add(temp.fold(0, (tot, doc) =>  tot + doc));
+    }
+    print(_listOfWorkTimePerRate.toString());
   }
 
   @override
