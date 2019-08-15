@@ -11,10 +11,8 @@ class SummaryTab extends StatefulWidget{
 }
 
 class _SummaryTabState extends State<SummaryTab>{
-  double _workedTime = 0.0;
-  double _salary = 0.0;
-  double _salaryPerMonth = 0;
-  double _workTimePerMonth = 0;
+//  double _workedTime = 0.0;
+//  double _salary = 0.0;
   List<dynamic> _listOfRates = new List();
   List<dynamic> _listOfWorkTimePerRate = new List();
   List<dynamic> _listOfSalaryPerRate = new List();
@@ -40,78 +38,72 @@ class _SummaryTabState extends State<SummaryTab>{
             _listOfRates = createListOfRates(snapshot);
             _listOfSalaryPerRate = createListOfSalary(snapshot, _listOfRates);
             _listOfWorkTimePerRate = createListOfWorkTime(snapshot, _listOfRates);
-            /** ---------------------------TEST VIEW---------------------------------------*/
-            print(_listOfRates.toString());
-            print(_listOfWorkTimePerRate.toString());
-            print(_listOfSalaryPerRate.toString());
-            /** ---------------------------------------------------------------------------*/
             if (this.mounted){
               setState(() {
-                _workedTime = tempWorkTime;
-                _salary = tempSalary;
+                _listOfRates.add("Total");
+                _listOfWorkTimePerRate.add(tempWorkTime);
+                _listOfSalaryPerRate.add(tempSalary);
+//                _workedTime = tempWorkTime;
+//                _salary = tempSalary;
               });
       }
     });
   }
 
+  Widget _createItem(int index){
+    String rate =  _listOfRates[index].toString();
+    return new Card(
+//      color: Colors.white.withAlpha(230),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+      child: new Container(
+        padding: EdgeInsets.only(left: 75, right: 75),
+        child: Column(
+          children: <Widget>[
+            Divider(height: 15, color: Colors.transparent,),
+            Center(child: Text(rate.toString() == "Total" ? "Total" : "Job per rate: $rate", style: TextStyle(fontSize: 18),)),
+            Divider(height: 20, color: styleColor,),
+            Container(
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    child:Row(
+                      children: <Widget>[
+                        Container(
+                          child: const Text("Time worked: ", style: TextStyle(fontSize: 16),),
+                          width: 170,
+                        ),
+                        Text(_listOfWorkTimePerRate[index].toString(), style: TextStyle(fontSize: 16),)
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(height: 10, color: Colors.transparent,),
+            Container(
+              child:Row(
+                children: <Widget>[
+                  Container(
+                    child: const Text("Salary: ", style: TextStyle(fontSize: 16),),
+                    width: 170,
+                  ),
+                  Text(_listOfSalaryPerRate[index].toString(), style: TextStyle(fontSize: 16),)
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: ListView(
-          padding: EdgeInsets.only(left: 75, right: 75),
-          physics: const NeverScrollableScrollPhysics(),
-          children: <Widget>[
-            Divider(height: 25, color: Colors.transparent,),
-            const Center(child:Text("Summary", style: TextStyle(fontSize: 22),)),
-            Divider(height: 25, color: styleColor,),
-            const Center(child: Text("Per month", style: TextStyle(fontSize: 18),)),
-            Container(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: const Text("Time: ", style: TextStyle(fontSize: 16),),
-                      width: 170,
-                    ),
-                    Text(_workTimePerMonth.toString(), style: TextStyle(fontSize: 16),)
-                  ],
-                )
-            ),
-            Container(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: const Text("Salary: ", style: TextStyle(fontSize: 16),),
-                      width: 170,
-                    ),
-                    Text(_salaryPerMonth.toString(), style: TextStyle(fontSize: 16),)
-                  ],
-                )
-            ),
-            Divider(height: 25, color: Colors.transparent,),
-            const Center(child: Text("Total", style: TextStyle(fontSize: 18),),),
-            Container(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                        child: const Text("Time worked: ", style: TextStyle(fontSize: 16),),
-                        width: 170,
-                    ),
-                    Text(_workedTime.toString(), style: TextStyle(fontSize: 16),)
-                  ],
-            )
-            ),
-            Container(
-                child: Row(
-                  children: <Widget>[
-                    Container(
-                      child: const Text("Salary: ", style: TextStyle(fontSize: 16),),
-                      width: 170,
-                    ),
-                    Text(_salary.toString(), style: TextStyle(fontSize: 16),)
-              ],
-            )
-            ),
-          ],)
+    return ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: _listOfRates.length,
+                    itemBuilder: (BuildContext ctxt, int index) => _createItem(index)
     );
   }
 }
