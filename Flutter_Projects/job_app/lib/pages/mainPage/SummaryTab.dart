@@ -54,14 +54,14 @@ class _SummaryTabState extends State<SummaryTab>{
     String rate =  _listOfRates[index].toString();
     return new Card(
 //      color: Colors.white.withAlpha(230),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+//      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       child: new Container(
         padding: EdgeInsets.only(left: 75, right: 75),
         child: Column(
           children: <Widget>[
-            Divider(height: 15, color: Colors.transparent,),
+            Divider(height: 30, color: Colors.transparent,),
             Center(child: Text(rate.toString() == "Total" ? "Total" : "Job per rate: $rate", style: TextStyle(fontSize: 18),)),
-            Divider(height: 20, color: styleColor,),
+            Divider(height: 30, color: styleColor,),
             Container(
               child: Row(
                 children: <Widget>[
@@ -70,7 +70,6 @@ class _SummaryTabState extends State<SummaryTab>{
                       children: <Widget>[
                         Container(
                           child: const Text("Time worked: ", style: TextStyle(fontSize: 16),),
-                          width: 170,
                         ),
                         Text(_listOfWorkTimePerRate[index].toString(), style: TextStyle(fontSize: 16),)
                       ],
@@ -91,6 +90,7 @@ class _SummaryTabState extends State<SummaryTab>{
                 ],
               ),
             ),
+            Divider(height: 30, color: Colors.transparent,),
           ],
         ),
       ),
@@ -100,7 +100,7 @@ class _SummaryTabState extends State<SummaryTab>{
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+//                    physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: _listOfRates.length,
                     itemBuilder: (BuildContext ctxt, int index) => _createItem(index)
