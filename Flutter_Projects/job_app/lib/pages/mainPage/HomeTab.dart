@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:job_app/pages/authorizationPage/Authorization.dart';
+import 'package:job_app/items/StyleSettings.dart';
 
 class HomeTab extends StatefulWidget{
 
@@ -12,6 +13,7 @@ class _HomeTabState extends State<HomeTab>{
 
   String _user = "1";
   Authorization _db = new Authorization();
+
 
   @override
   void initState(){
@@ -31,7 +33,8 @@ class _HomeTabState extends State<HomeTab>{
     return StreamBuilder(
         stream: Firestore.instance.collection(_user).snapshots(),
         builder: (context, snapshot){
-          if(!snapshot.hasData) return const Text('Loading...');
+//          if(!snapshot.hasData) return const Text('Loading...');
+          if(!snapshot.hasData) return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(styleColor)));
           return new DataTable(
             columnSpacing: 15,
             columns: [
