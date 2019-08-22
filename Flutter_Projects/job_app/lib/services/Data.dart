@@ -5,8 +5,8 @@ List<dynamic> _getListOfRates(QuerySnapshot snapshot){
   List<double> tempList = new List();
   return snapshot.documents.map((doc){
     if(tempList.indexOf(doc['rate']) == -1){
-      tempList.add(doc['rate']);
-      return doc['rate'];
+      tempList.add(doc['rate'].toDouble());
+      return doc['rate'].toDouble();
     }
   }).toList();
 }
