@@ -23,6 +23,7 @@ class _MainPageState extends State<MainPage>{
     HomeTab(),        //DATA TABLE TAB
     SummaryTab(),     //SUMMARY TAB
     AddTab(),         //ADD TAB
+//    FancyFab(),
   ];
 
   @override
@@ -66,7 +67,7 @@ class _MainPageState extends State<MainPage>{
           ),
           body: _widgetOptions.elementAt(_selectedIndex),
           key: scaffoldKey,
-          floatingActionButton: FloatingButtonMenu(),
+          floatingActionButton: FancyFab(),
           /*floatingActionButton: FloatingActionButton(
               backgroundColor: styleColor,
               child: Center(
