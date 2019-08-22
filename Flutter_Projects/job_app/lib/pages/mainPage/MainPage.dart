@@ -6,6 +6,8 @@ import 'package:job_app/pages/mainPage/HomeTab.dart';
 import 'package:job_app/pages/mainPage/MenuDrawer.dart';
 import 'package:job_app/pages/mainPage/AddTab.dart';
 import 'package:job_app/pages/mainPage/SummaryTab.dart';
+import 'package:job_app/pages/mainPage/MenuFloatingButton.dart';
+
 
 class MainPage extends StatefulWidget{
   @override
@@ -64,13 +66,14 @@ class _MainPageState extends State<MainPage>{
           ),
           body: _widgetOptions.elementAt(_selectedIndex),
           key: scaffoldKey,
-          floatingActionButton: FloatingActionButton(
+          floatingActionButton: FloatingButtonMenu(),
+          /*floatingActionButton: FloatingActionButton(
               backgroundColor: styleColor,
               child: Center(
                   child:Icon(AntIcons.form)
               ),
               onPressed: () {}
-          ),
+          ),*/
         ),
       ),
     );
