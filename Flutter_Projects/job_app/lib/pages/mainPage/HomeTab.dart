@@ -35,7 +35,9 @@ class _HomeTabState extends State<HomeTab>{
         builder: (context, snapshot){
 //          if(!snapshot.hasData) return const Text('Loading...');
           if(!snapshot.hasData) return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(styleColor)));
-          return new DataTable(
+          return SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child:  DataTable(
             columnSpacing: 15,
             columns: [
               DataColumn(
@@ -54,7 +56,7 @@ class _HomeTabState extends State<HomeTab>{
                 label: const Text("Rate"),
               ),
             ],
-            rows: _createRows(snapshot.data));
+            rows: _createRows(snapshot.data)),);
         });
   }
 
