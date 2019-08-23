@@ -70,6 +70,7 @@ class _SummaryTabState extends State<SummaryTab>{
                       children: <Widget>[
                         Container(
                           child: const Text("Time worked: ", style: TextStyle(fontSize: 16),),
+                          width: 170,
                         ),
                         Text(_listOfWorkTimePerRate[index].toString(), style: TextStyle(fontSize: 16),)
                       ],
